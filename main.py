@@ -66,7 +66,7 @@ class SensorScreen(Screen):
         t_k = round(o_k / to_coeff)
         t_value = t_min + t_k - 1
         if t_k < 1:
-            t_value = 30
+            t_value = t_min
         return t_value
 
 
