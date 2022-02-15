@@ -51,7 +51,7 @@ class SensorScreen(Screen):
 
 
         #self.ids.engine_temp_sensor.text = "Engine temp: {} С".format(int(engine_temp))
-        self.ids.engine_temp_sensor.text = "Engine temp: {} С".format(int(self.convert_ohm_to_temp(100, 1000, 30, 120, 650)))
+        self.ids.engine_temp_sensor.text = "Engine temp: {} С".format(int(self.convert_ohm_to_temp(30, 120, 100, 1000, 650)))
         self.ids.engine_oil_sensor.text = "Engine oil: {} С".format(int(engine_oil))
         self.ids.fuel_level_sensor.text = "Fuel level: {} С".format(int(fuel_level))
 
