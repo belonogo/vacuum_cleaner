@@ -121,11 +121,11 @@ class WiringControls:
     def analog_read(self, pin):
         return self.exp.analogRead(pin)
 
-    def read_resistance(self, pin, R1, Vin):
+    def read_resistance(self, pin, R2, Vin):
         raw_signal = self.analog_read(pin)
-        Vout = raw_signal * Vin
-        R2 = R1 * (Vin / Vout - 1)
-        return R2
+        Vout = raw_signal
+        R1 = ((Vin * R2) / Vout) - R2
+        return R1
 
     def digital_read_exp(self, pin):
         val = self.analog_read(pin)
