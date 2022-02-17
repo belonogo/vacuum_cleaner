@@ -62,21 +62,17 @@
 
 <PopupScreen>:
     id: popup_settings
-
-    Label:
-        text: "Введите пароль"
-        size_hint: 0.6, 0.2
-        pos_hint: {"x": 0.2, "top": 1}
+    title: "Введите пароль"
 
     TextInput:
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.8}
 
-    CustomButton:
-        id: popup_settings_button
+    Button:
         text: "Ввести"
-        pos_hint: {"x": 0.2, "y": 0.1}
-        on_release: root.dismiss()
+        size_hint: 0.8, 0.2
+        pos_hint: {"x": 0.1, "y": 0.2}
+        on_release: popup_settings.dismiss()
 
 <BaseScreen>:
     id: base_screen

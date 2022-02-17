@@ -34,7 +34,7 @@ class BaseScreen(Screen):
 
     def show_popup(self):
         show = PopupScreen()
-        popupWindow = Popup(title="Пароль", content=show, size_hint=(None, None), size=(400, 400))
+        popupWindow = Popup(content=show, size_hint=(None, None), size=(400, 400))
         popupWindow.open()
 
 class SensorScreen(Screen):
