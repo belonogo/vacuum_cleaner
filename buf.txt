@@ -1,0 +1,48 @@
+
+ on_release: root.manager.current = 'settings'
+Кнопки brush ______________________________________________________
+
+    ArrowButton:
+        id: brush_close_button
+        background_normal: "Graphics/Brush/narr_left_normal.tif"
+        background_down: "Graphics/Brush/narr_left_pressed.tif"
+        pos_hint: {"x": 0.08, "y": 0.45}
+        on_press: root.on_brush_move_press('CLOSE')
+        on_release: root.on_brush_move_release('CLOSE')
+
+    ArrowButton:
+        id: brush_apart_button
+        background_normal: "Graphics/Brush/narr_right_normal.tif"
+        background_down: "Graphics/Brush/narr_right_pressed.tif"
+        pos_hint: {"x": 0.286, "y": 0.45}
+        on_press: root.on_brush_move_press('APART')
+        on_release: root.on_brush_move_release('APART')
+
+    Slider:
+        id: brush_speed_slider
+        min: 0
+        max: 12
+        step: 1
+        orientation: "vertical"
+        value_track: True
+        background_vertical: "Graphics/Brush/Brush_speed_line_fixed.tif"
+        cursor_image: "Graphics/Brush/Brush_speed_line_adjustable.tif"
+        size_hint: (0.15, 0.4)
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        on_value: root.on_brush_speed_value(self, self.value)
+
+    IndicatorText:
+        text: "Скорость"
+        bold: True
+        pos_hint: {"center_x": 0.5, "center_y": 0.75}
+
+    IndicatorText:
+        text: "MAX"
+        pos_hint: {"center_x": 0.56, "center_y": 0.65}
+
+    IndicatorText:
+        text: "MIN"
+        pos_hint: {"center_x": 0.56, "center_y": 0.35}
+
+______________________________________________________
+

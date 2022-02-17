@@ -16,7 +16,13 @@ from kivy.uix.scatter import Scatter
 from kivy.properties import NumericProperty, BoundedNumericProperty, StringProperty
 from kivy.animation import Animation
 
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.popup import Popup
 
+
+
+class PopupScreen(FloatLayout):
+    pass
 
 class BaseScreen(Screen):
 
@@ -25,6 +31,11 @@ class BaseScreen(Screen):
 
     def on_stop(self):
         app.wc.stop_all()
+
+    def show_popup(self):
+        show = PopupScreen()
+        popupWindow = Popup(title="Пароль", content=show, size_hint=(None, None), size=(400, 400))
+        popupWindow.open()
 
 class SensorScreen(Screen):
 
