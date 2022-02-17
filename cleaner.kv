@@ -62,7 +62,7 @@
 
 <PopupScreen>:
     id: popup_settings
-    title: "Введите пароль"
+    title: 'Введите пароль'
 
     TextInput:
         size_hint: 0.8, 0.2
@@ -72,7 +72,7 @@
         text: "Ввести"
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.2}
-        on_release: popup_settings.dismiss()
+        on_press: popup_settings.dismiss()
 
 <BaseScreen>:
     id: base_screen
