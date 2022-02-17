@@ -1,6 +1,8 @@
 import spidev
 import time
 
+dick = 0
+
 SPI_BUS = 0          # spidev0
 SPI_SS  = 0          # spidev0.0
 SPI_CLOCK = 1000000  # 1 Mhz
