@@ -26,3 +26,16 @@
         size_hint: (0.15, 0.4)
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         on_value: root.on_brush_speed_value(self, self.value)
+
+    IndicatorText:
+        text: "Скорость"
+        bold: True
+        pos_hint: {"center_x": 0.5, "center_y": 0.75}
+
+    IndicatorText:
+        text: "MAX"
+        pos_hint: {"center_x": 0.56, "center_y": 0.65}
+
+    IndicatorText:
+        text: "MIN"
+        pos_hint: {"center_x": 0.56, "center_y": 0.35}
