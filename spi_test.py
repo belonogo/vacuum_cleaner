@@ -1,8 +1,6 @@
-from functools import partial
 from subprocess import call
 import threading
 import time
-import cv2
 import wiring_controls as wc
 from kivy.core.window import Window
 from kivy.app import App
