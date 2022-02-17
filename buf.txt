@@ -1,3 +1,7 @@
+
+ on_release: root.manager.current = 'settings'
+Кнопки brush ______________________________________________________
+
     ArrowButton:
         id: brush_close_button
         background_normal: "Graphics/Brush/narr_left_normal.tif"
@@ -39,3 +43,6 @@
     IndicatorText:
         text: "MIN"
         pos_hint: {"center_x": 0.56, "center_y": 0.35}
+
+______________________________________________________
+

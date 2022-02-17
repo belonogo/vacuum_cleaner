@@ -60,6 +60,16 @@
             source: gauge.needle_source
             size: gauge.size_value
 
+<PopupScreen>:
+    Label:
+        text: "Введите пароль"
+        size_hint: 0.6, 0.2
+        pos_hint: {"x": 0.2, "top": 1}
+
+    TextInput:
+        text: "Введите пароль"
+        size_hint: 0.8, 0.2
+        pos_hint: {"x": 0.1, "y": 0.1}
 
 <BaseScreen>:
     id: base_screen
@@ -147,7 +157,7 @@
             background_normal: "Graphics/share/Setting_page_normal.tif"
             background_down: "Graphics/share/Setting_page_pressed.tif"
             pos_hint: {"x": 0.83}
-            on_release: root.manager.current = 'settings'
+            on_release: root.show_popup()
 
         CustomButton:
             id: quit_button
