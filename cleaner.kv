@@ -67,9 +67,14 @@
         pos_hint: {"x": 0.2, "top": 1}
 
     TextInput:
-        text: "Введите пароль"
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.1}
+
+    CustomButton:
+        id: popup_settings_button
+        text: "Выйти"
+        pos_hint: {"top": 1, "right": 1}
+        on_release: root.manager.current = 'settings'
 
 <BaseScreen>:
     id: base_screen
