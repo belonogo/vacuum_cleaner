@@ -371,7 +371,7 @@ class SettingsScreen(Screen):
         pass
 
 class PasswordScreen(Screen):
-    current_string = ""
+    #current_string = ""
 
     def __init__(self, **kwargs):
         super(PasswordScreen, self).__init__(**kwargs)
@@ -380,8 +380,8 @@ class PasswordScreen(Screen):
         pass
 
     def input_int(self, input):
-        self.current_string += input
-        self.ids.input_password.text = self.current_string
+        #self.current_string += input
+        self.ids.input_password.text += input
 
     def read_password(self):
         password = self.ids.input_password.text
