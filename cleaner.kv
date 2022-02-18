@@ -417,6 +417,7 @@
         pos_hint: {"x": 0.1, "y": 0.8}
 
     TextInput:
+        id: input_password
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.5}
 
@@ -424,4 +425,4 @@
         text: "Ввести"
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.2}
-        on_release: root.manager.current = "settings"
+        on_release: root.read_password(); root.manager.current = "settings"

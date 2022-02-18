@@ -371,11 +371,20 @@ class SettingsScreen(Screen):
         pass
 
 class PasswordScreen(Screen):
+
     def __init__(self, **kwargs):
         super(PasswordScreen, self).__init__(**kwargs)
 
     def on_stop(self):
         pass
+
+    def read_password(self):
+        password = self.root.ids.input_password.text
+        if (password == "2022"):
+            print("good")
+        else:
+            print("not good")
+
 
 class CleanerApp(App):
 
