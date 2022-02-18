@@ -381,9 +381,9 @@ class PasswordScreen(Screen):
     def read_password(self):
         password = self.ids.input_password.text
         if (password == "2022"):
-            self.ids.root.manager.current = 'settings'
+            self.ids.manager.current = 'settings'
         else:
-            self.ids.root.manager.current = 'base'
+            self.ids.manager.current = 'base'
 
 
 class CleanerApp(App):
