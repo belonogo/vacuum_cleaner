@@ -28,8 +28,6 @@ class PopupScreen(FloatLayout):
         self.wc = app.wc
 
 class BaseScreen(Screen):
-    show = PopupScreen()
-    popupWindow = Popup(title="Введите пароль", content=show, size_hint=(None, None), size=(400, 400))
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
@@ -38,8 +36,10 @@ class BaseScreen(Screen):
         app.wc.stop_all()
 
     def show_popup(self):
-        self.popupWindow.open()
-        self.popupWindow.dismiss()
+        show = PopupScreen()
+        popupWindow = Popup(title="Введите пароль", content=show, size_hint=(None, None), size=(400, 400))
+        popupWindow.open()
+        popupWindow.dismiss()
 
     def kill_popup(self):
         self.popupWindow.dismiss()
