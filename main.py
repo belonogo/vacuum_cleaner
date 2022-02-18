@@ -378,9 +378,9 @@ class PasswordScreen(Screen):
     def on_stop(self):
         pass
 
-    #def input_int(self, input):
+    def input_int(self, input):
         #current_string = input
-        #self.ids.input_password.text = self.ids.input_password.text + input
+        self.ids.input_password.text = self.ids.input_password.text + input
 
     def read_password(self):
         password = self.ids.input_password.text
