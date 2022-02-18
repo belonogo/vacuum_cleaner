@@ -379,7 +379,7 @@ class PasswordScreen(Screen):
         pass
 
     def read_password(self):
-        password = self.root.ids.input_password.text
+        password = self.ids.input_password.text
         if (password == "2022"):
             print("good")
         else:
