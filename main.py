@@ -391,6 +391,7 @@ class PasswordScreen(Screen):
             self.manager.current = 'settings'
         else:
             self.manager.current = 'base'
+        self.clear_line()
 
 
 class CleanerApp(App):
