@@ -22,10 +22,7 @@ from kivy.uix.popup import Popup
 
 
 class PopupScreen(FloatLayout):
-
-    def __init__(self, **kwargs):
-        super(PopupScreen, self).__init__(**kwargs)
-        self.wc = app.wc
+    pass
 
 class BaseScreen(Screen):
 
@@ -38,11 +35,9 @@ class BaseScreen(Screen):
     def show_popup(self):
         show = PopupScreen()
         popupWindow = Popup(title="Введите пароль", content=show, size_hint=(None, None), size=(400, 400))
+        show.bind(on_press=popupWindow.dismiss)
         popupWindow.open()
-        popupWindow.dismiss()
-
-    def kill_popup(self):
-        self.popupWindow.dismiss()
+        #popupWindow.dismiss()
 
 class SensorScreen(Screen):
 
