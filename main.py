@@ -22,7 +22,9 @@ from kivy.uix.popup import Popup
 
 
 class PopupScreen(FloatLayout):
-    pass
+
+    def __init__(self, **kwargs):
+        super(PopupScreen, self).__init__(**kwargs)
 
 class BaseScreen(Screen):
 
