@@ -1,6 +1,7 @@
 #:kivy 1.11.0
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 #:import stopTouchApp kivy.base.stopTouchApp
+#:import Factory kivy.factory.Factory
 
 
 <IndicatorText@Label>:
@@ -60,18 +61,19 @@
             source: gauge.needle_source
             size: gauge.size_value
 
-<PopupScreen>:
+<PopupScreen@Popup>:
     id: popup_settings
+    auto_dismiss: False
 
     TextInput:
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.8}
 
     Button:
-        id: popup_button
         text: "Ввести"
         size_hint: 0.8, 0.2
         pos_hint: {"x": 0.1, "y": 0.2}
+        on_release: root.dismiss()
 
 <BaseScreen>:
     id: base_screen
