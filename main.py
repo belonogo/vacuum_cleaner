@@ -382,6 +382,9 @@ class PasswordScreen(Screen):
         #current_string = input
         self.ids.input_password.text = self.ids.input_password.text + input
 
+    def clear_line(self):
+        self.ids.input_password.text = ""
+
     def read_password(self):
         password = self.ids.input_password.text
         if (password == "2022"):
