@@ -380,6 +380,12 @@ class SettingsScreen(Screen):
     def on_stop(self):
         pass
 
+class PasswordScreen(Screen):
+    def __init__(self, **kwargs):
+        super(PasswordScreen, self).__init__(**kwargs)
+
+    def on_stop(self):
+        pass
 
 class CleanerApp(App):
 
