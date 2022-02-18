@@ -25,6 +25,7 @@ class PopupScreen(FloatLayout):
 
     def __init__(self, **kwargs):
         super(PopupScreen, self).__init__(**kwargs)
+        self.wc = app.wc
 
 class BaseScreen(Screen):
 
