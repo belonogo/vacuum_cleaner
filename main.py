@@ -35,7 +35,7 @@ class BaseScreen(Screen):
     def show_popup(self):
         show = PopupScreen()
         popupWindow = Popup(title="Введите пароль", content=show, size_hint=(None, None), size=(400, 400))
-        show.bind(on_press=popupWindow.dismiss)
+        show.popup_button.bind(on_press=popupWindow.dismiss)
         popupWindow.open()
         #popupWindow.dismiss()
 
