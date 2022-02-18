@@ -416,6 +416,7 @@ class CleanerApp(App):
         screen_manager.add_widget(BaseScreen(name='base'))
         screen_manager.add_widget(CameraScreen(name='camera'))
         screen_manager.add_widget(SettingsScreen(name='settings'))
+        screen_manager.add_widget(PasswordScreen(name='password'))
         return screen_manager
 
 
