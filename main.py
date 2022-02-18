@@ -379,8 +379,7 @@ class PasswordScreen(Screen):
         pass
 
     def add_in_line(self, input):
-        #current_string = input
-        self.ids.input_password.text = self.ids.input_password.text + input
+        self.ids.input_password.text += input
 
     def clear_line(self):
         self.ids.input_password.text = ""
