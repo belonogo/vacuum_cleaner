@@ -1,5 +1,15 @@
+<PopupScreen@Popup>:
+    TextInput:
+        size_hint: 0.8, 0.2
+        pos_hint: {"x": 0.1, "y": 0.8}
 
- on_release: root.manager.current = 'settings'
+    Button:
+        text: "Ввести"
+        size_hint: 0.8, 0.2
+        pos_hint: {"x": 0.1, "y": 0.2}
+        on_release: root.dismiss()
+
+on_release: root.manager.current = 'settings'
 Кнопки brush ______________________________________________________
 
     ArrowButton:

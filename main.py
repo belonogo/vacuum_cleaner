@@ -16,13 +16,13 @@ from kivy.uix.scatter import Scatter
 from kivy.properties import NumericProperty, BoundedNumericProperty, StringProperty
 from kivy.animation import Animation
 
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.popup import Popup
+#from kivy.uix.floatlayout import FloatLayout
+#from kivy.uix.popup import Popup
 
 
 
-class PopupScreen(FloatLayout):
-    pass
+#class PopupScreen(FloatLayout):
+    #pass
 
 class BaseScreen(Screen):
 
@@ -32,10 +32,10 @@ class BaseScreen(Screen):
     def on_stop(self):
         app.wc.stop_all()
 
-    def show_popup(self):
-        show = PopupScreen()
-        popupWindow = Popup(title="Введите пароль", content=show, size_hint=(None, None), size=(400, 400))
-        popupWindow.open()
+    #def show_popup(self):
+        #show = PopupScreen()
+        #popupWindow = Popup(title="Введите пароль", content=show, size_hint=(None, None), size=(400, 400))
+        #popupWindow.open()
         #popupWindow.dismiss()
 
 class SensorScreen(Screen):
@@ -410,7 +410,6 @@ class CleanerApp(App):
         screen_manager.add_widget(BaseScreen(name='base'))
         screen_manager.add_widget(CameraScreen(name='camera'))
         screen_manager.add_widget(SettingsScreen(name='settings'))
-        screen_manager.add_widget(PopupScreen(name='popup'))
         return screen_manager
 
 
