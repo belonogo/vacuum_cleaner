@@ -386,7 +386,7 @@ class PasswordScreen(Screen):
 
     def read_password(self):
         password = self.ids.input_password.text
-        if (password == "2022"):
+        if (password == '2022'):
             self.manager.current = 'settings'
         else:
             self.manager.current = 'base'
