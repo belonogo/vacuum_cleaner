@@ -3,16 +3,6 @@
 #:import stopTouchApp kivy.base.stopTouchApp
 #:import Factory kivy.factory.Factory
 
-<MyPopup@Popup>:
-    auto_dismiss: False
-    Button:
-        text: 'Close me!'
-        on_release: root.dismiss()
-
-Button:
-    text: 'Open popup'
-    on_release: Factory.MyPopup().open()
-
 <IndicatorText@Label>:
     size_hint: (0.35, 0.05)
     font_size: root.height
@@ -427,3 +417,14 @@ Button:
         text: "Вернуться"
         pos_hint: {"x": 0.83, "y": 0.04}
         on_press: root.manager.current = "base"
+
+
+<MyPopup@Popup>:
+    auto_dismiss: False
+    Button:
+        text: 'Close me!'
+        on_release: root.dismiss()
+
+Button:
+    text: 'Open popup'
+    on_release: Factory.MyPopup().open()
