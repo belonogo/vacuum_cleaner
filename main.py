@@ -21,23 +21,55 @@ class BaseScreen(Screen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
-        self.blinking('gasoline', 'water')
+        self.blinking(True)
+        time.sleep(3)
+        self.blinking(False)
+        time.sleep(3)
+        self.blinking(True, 'gasoline', 'water')
+        time.sleep(3)
+        self.blinking(False, 'water')
 
     def on_stop(self):
         app.wc.stop_all()
 
-    def blinking(self, *args):
-        for indicator in args:
-            if indicator == 'gasoline':
-                self.ids.indicator_gasoline.opacity = 0.1
-            elif indicator == 'overheat':
-                self.ids.indicator_overheat.opacity = 0.1
-            elif indicator == 'water':
-                self.ids.indicator_water.opacity = 0.1
-            elif indicator == 'battery':
-                self.ids.indicator_battery.opacity = 0.1
-            elif indicator == 'ignition':
-                self.ids.indicator_ignition.opacity = 0.1
+    def blinking(self, turn, *args):
+        if len(args) == 0:
+            for indicator in args:
+                if turn:
+                    if indicator == 'gasoline':
+                        self.ids.indicator_gasoline.opacity = 1.0
+                    elif indicator == 'overheat':
+                        self.ids.indicator_overheat.opacity = 1.0
+                    elif indicator == 'water':
+                        self.ids.indicator_water.opacity = 1.0
+                    elif indicator == 'battery':
+                        self.ids.indicator_battery.opacity = 1.0
+                    elif indicator == 'ignition':
+                        self.ids.indicator_ignition.opacity = 1.0
+                else:
+                    if indicator == 'gasoline':
+                        self.ids.indicator_gasoline.opacity = 0.0
+                    elif indicator == 'overheat':
+                        self.ids.indicator_overheat.opacity = 0.0
+                    elif indicator == 'water':
+                        self.ids.indicator_water.opacity = 0.0
+                    elif indicator == 'battery':
+                        self.ids.indicator_battery.opacity = 0.0
+                    elif indicator == 'ignition':
+                        self.ids.indicator_ignition.opacity = 0.0
+        else:
+            if turn:
+                self.ids.indicator_gasoline.opacity = 1.0
+                self.ids.indicator_overheat.opacity = 1.0
+                self.ids.indicator_water.opacity = 1.0
+                self.ids.indicator_battery.opacity = 1.0
+                self.ids.indicator_ignition.opacity = 1.0
+            else:
+                self.ids.indicator_gasoline.opacity = 0.0
+                self.ids.indicator_overheat.opacity = 0.0
+                self.ids.indicator_water.opacity = 0.0
+                self.ids.indicator_battery.opacity = 0.0
+                self.ids.indicator_ignition.opacity = 0.0
 
 
 class SensorScreen(Screen):
