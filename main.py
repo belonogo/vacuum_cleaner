@@ -17,15 +17,27 @@ from kivy.properties import NumericProperty, BoundedNumericProperty, StringPrope
 from kivy.animation import Animation
 
 
-
 class BaseScreen(Screen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
+        self.blinking('gasoline', 'water')
 
     def on_stop(self):
         app.wc.stop_all()
 
+    def blinking(self, *args):
+        for indicator in args:
+            if indicator == 'gasoline':
+                self.ids.indicator_gasoline.opacity = 0.1
+            elif indicator == 'overheat':
+                self.ids.indicator_overheat.opacity = 0.1
+            elif indicator == 'water':
+                self.ids.indicator_water.opacity = 0.1
+            elif indicator == 'battery':
+                self.ids.indicator_battery.opacity = 0.1
+            elif indicator == 'ignition':
+                self.ids.indicator_ignition.opacity = 0.1
 
 
 class SensorScreen(Screen):
@@ -51,14 +63,12 @@ class SensorScreen(Screen):
     def update_sensors(self, engine_state, engine_temp, engine_oil, fuel_level, water_level):
         self.ids.engine_state_sensor.text = "Engine is " + "ON" if engine_state else "OFF"
 
-
         self.ids.engine_temp_sensor.text = "Engine temp: {} С".format(int(engine_temp))
         #self.ids.engine_temp_sensor.text = "Engine temp: {} С".format(int(self.convert_ohm_to_temp(30, 120, 100, 1000, 650)))
         self.ids.engine_oil_sensor.text = "Engine oil: {} С".format(int(engine_oil))
         self.ids.fuel_level_sensor.text = "Fuel level: {} С".format(int(fuel_level))
 
         self.ids.water_level_sensor.text = "Water level: {}".format(water_level)
-
 
     def convert_ohm_to_temp(self, t_min, t_max, o_min, o_max, o_value):
         t_count = t_max - t_min + 1
@@ -70,7 +80,6 @@ class SensorScreen(Screen):
         if t_k < 1:
             t_value = t_min
         return t_value
-
 
     def sensors_thread(self):
         while not app.stop_event.is_set():
@@ -101,7 +110,6 @@ class BrushScreen(Screen):
         value = value / instance.max * wc.PWM_DC_RANGE
         self.wc.set_pwm_dc(wc.BRUSH_PIN, int(value))
 
-
     # Movement of the brushes (up, down, pull apart, bring closer)
     def on_brush_move_press(self, direction):
         # When the button is pressed
@@ -118,7 +126,6 @@ class BrushScreen(Screen):
             self.wc.digital_write(wc.BRUSH_CLOSE_PIN, 0)
             self.wc.digital_write(wc.BRUSH_APART_PIN, 1)
 
-
     def on_brush_move_release(self, direction):
         # When the button is released
         if direction == "UP":
@@ -129,7 +136,6 @@ class BrushScreen(Screen):
             self.wc.digital_write(wc.BRUSH_CLOSE_PIN, 0)
         elif direction == "APART":
             self.wc.digital_write(wc.BRUSH_APART_PIN, 0)
-
 
     # Switch vacuum cleaner state if possible
     def on_vacuum_cleaner_button_release(self):
@@ -146,7 +152,6 @@ class BrushScreen(Screen):
             self.vacuum_cleaner_state = 0
             self.ids.vacuum_cleaner_button.background_normal = "Graphics/Brush/Vacuum_button_normal.tif"
 
-
     # Separate thread for disabling vacuum cleaner on body_is_up
     def body_state_thread(self):
         while not app.stop_event.is_set():
@@ -154,7 +159,6 @@ class BrushScreen(Screen):
                 # if the body is up, the vacuum cleaner must be disabled.
                 self.on_vacuum_cleaner_switch_release()
             time.sleep(0.1) # in seconds
-
 
     def joystick_thread(self):
         pins = [wc.JOYSTICK_UP_PIN, wc.JOYSTICK_DOWN_PIN, wc.JOYSTICK_LEFT_PIN, wc.JOYSTICK_RIGHT_PIN]
@@ -183,7 +187,6 @@ class BrushScreen(Screen):
             print("brush written 1")
             self.ids.brush_button.background_normal = "Graphics/Brush/Brush_button_pressed.tif"
 
- 
     def on_water_button_release(self):
         print("Water button pressed!")
         if self.water is True:
@@ -228,7 +231,7 @@ class EngineScreen(Screen):
             motominutes = int(app.motohours_f.readline())
             motohours = int(motominutes / 60)
             self.update_motohours(motohours)
-            app.motohours_f.seek(0, 0) # Seek 0 offset from start of the file
+            app.motohours_f.seek(0, 0)  # Seek 0 offset from start of the file
             app.motohours_f.write(str(motominutes + 1))
             time.sleep(60)
 
@@ -259,7 +262,7 @@ class EngineScreen(Screen):
         self.wc.digital_write(wc.ENGINE_STOP_PIN, 0)
 
     def on_engine_speed_value(self, instance, value):
-        value = value / instance.max * 2 - 1 # from -1 to 1
+        value = value / instance.max * 2 - 1  # from -1 to 1
         print("on engine value", value)
         self.wc.engine_speed_servo(value)
 
@@ -275,7 +278,6 @@ class BodyScreen(Screen):
         self.flasher = False
         self.lights = False
         threading.Thread(target=self.body_state_thread).start()
-
 
     def on_flasher_release(self):
         if self.flasher is True:
@@ -297,8 +299,6 @@ class BodyScreen(Screen):
             self.wc.digital_write_exp(wc.LIGHTS_PIN, 1)
             self.ids.lights_button.background_normal = "Graphics/Body/Lights_on.tif"
 
-
-
     # Movement of the body of the vehicle (up, down)
     def on_body_move_press(self, direction):
         # Button pressed
@@ -309,7 +309,6 @@ class BodyScreen(Screen):
             self.wc.digital_write(wc.BODY_UP_PIN, 0)
             self.wc.digital_write(wc.BODY_DOWN_PIN, 1)
 
-
     def on_body_move_release(self, direction):
         # Button released
         if direction == "UP":
@@ -317,11 +316,9 @@ class BodyScreen(Screen):
         elif direction == "DOWN":
             self.wc.digital_write(wc.BODY_DOWN_PIN, 0)
 
-
     # Get the state of the body (1 if body is up)
     def body_state(self):
         return self.wc.digital_read(wc.BODY_STATE_PIN)
-
 
     # Separate thread for updating the body state
     def body_state_thread(self):
@@ -329,22 +326,20 @@ class BodyScreen(Screen):
             app.body_is_up = self.body_state()
             time.sleep(0.1) # in seconds
 
+
 class CameraScreen(Screen):
     def __init__(self, **kwargs):
         super(CameraScreen, self).__init__(**kwargs)
         self.fps = 30
         self.capture = cv2.VideoCapture(0)
 
-
     def schedule_update(self):
         self.scheduled_update = Clock.schedule_interval(self.update, 1.0 / self.fps)
-
 
     def try_reopen(self):
         self.capture.release()
         self.capture = cv2.VideoCapture(0)
         return self.capture.isOpened()
-
 
     def update(self, dt):
         if not self.capture.isOpened():
@@ -358,7 +353,6 @@ class CameraScreen(Screen):
             texture.blit_buffer(buf, colorfmt="bgr", bufferfmt="ubyte")
             self.ids.image.texture = texture
 
-
     def on_stop(self):
         self.capture.release()
 
@@ -369,6 +363,7 @@ class SettingsScreen(Screen):
 
     def on_stop(self):
         pass
+
 
 class PasswordScreen(Screen):
 
@@ -386,7 +381,7 @@ class PasswordScreen(Screen):
 
     def read_password(self):
         password = self.ids.input_password.text
-        if (password == '2022'):
+        if password == '2022':
             self.manager.current = 'settings'
         else:
             self.manager.current = 'base'

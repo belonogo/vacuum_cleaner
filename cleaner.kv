@@ -90,22 +90,27 @@
                 name: "body"
 
         IndicatorIcon:
+            id: indicator_gasoline
             source: "Graphics/share/Lamp_gasolin_low.tif"
             pos_hint: {"x": 0.009, "y": 0.861}
 
         IndicatorIcon:
+            id: indicator_overheat
             source: "Graphics/share/Lamp_overheat.tif"
             pos_hint: {"x": 0.084, "y": 0.861}
 
         IndicatorIcon:
+            id: indicator_water
             source: "Graphics/share/Lamp_low_water.tif"
             pos_hint: {"x": 0.167, "y": 0.861}
 
         IndicatorIcon:
+            id: indicator_battery
             source: "Graphics/share/Lamp_low_battery.tif"
             pos_hint: {"x": 0.250, "y": 0.861}
 
         IndicatorIcon
+            id: indicator_ignition
             source: "Graphics/share/Lamp_ignition_is_on.tif"
             pos_hint: {"x": 0.422, "y": 0.861}
 
@@ -408,6 +413,7 @@
         text: "Вернуться"
         pos_hint: {"x": 0.83, "y": 0.04}
         on_press: root.manager.current = "base"
+
 
 <PasswordScreen>:
 
