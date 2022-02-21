@@ -77,7 +77,7 @@ class BaseScreen(Screen):
     def update_rez(self):
         self.update_sensors_icons()
 
-    def update_sensors_icons(self):
+    def update_sensors_thread(self):
 
         self.ids.cringe.text = "{}".format(int(FUEL_CURRENT_LEVEL))
 
@@ -98,6 +98,7 @@ class BaseScreen(Screen):
 
         BATTERY_CURRENT_LEVEL = 100
         IGNITION_STATUS = 1
+        self.update_rez()
 
 
 class SensorScreen(Screen):
