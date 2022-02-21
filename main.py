@@ -30,7 +30,7 @@ class BaseScreen(Screen):
         app.wc.stop_all()
 
     def blinking(self, turn, *args):
-        if len(args) == 0:
+        if len(args) != 0:
             for indicator in args:
                 if turn:
                     if indicator == 'gasoline':
