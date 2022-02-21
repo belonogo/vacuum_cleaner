@@ -33,6 +33,7 @@ class BaseScreen(Screen):
     def on_stop(self):
         app.wc.stop_all()
 
+
     def blinking(self, turn, *args):
         if len(args) != 0:
             for indicator in args:
