@@ -61,6 +61,7 @@ PWM_DC_RANGE = 1024
 
 class WiringControls:
     def __init__(self):
+
         # setup WiringPi
         wp.wiringPiSetup()
         self.exp = gpioexp.gpioexp()
