@@ -87,6 +87,7 @@ class SensorScreen(Screen):
 
     @mainthread
     def update_speedometer(self, rpm):
+        temp = 1
         #self.ids.speedometer_sensor.text = "Speedometer: " + str(rpm)
 
     def speedometer_thread(self):
