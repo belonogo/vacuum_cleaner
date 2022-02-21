@@ -100,7 +100,7 @@ class BaseScreen(Screen):
             BATTERY_CURRENT_LEVEL = 100
             IGNITION_STATUS = 1
             fuel_level = self.wc.read_resistance(wc.FUEL_LEVEL_PIN, 25, 3.3)
-            self.update_icon(fuel_level)
+            self.update_icon(FUEL_CURRENT_LEVEL)
             time.sleep(0.5)
 
 
@@ -128,6 +128,7 @@ class SensorScreen(Screen):
     def update_sensors(self, engine_state, engine_temp, hyd_temp, fuel_level, water_level):
         #self.ids.engine_state_sensor.text = "Engine is " + "ON" if engine_state else "OFF"
 
+        global FUEL_CURRENT_LEVEL
         FUEL_CURRENT_LEVEL = int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level))
         self.ids.fuel_level_sensor.text = "Уровень топлива: {} %".format(
             int(FUEL_CURRENT_LEVEL))
