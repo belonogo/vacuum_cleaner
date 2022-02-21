@@ -19,13 +19,13 @@ from kivy.animation import Animation
 
 
 class BaseScreen(Screen):
-    t = Thread(target=self.init_blink)
+    #t = Thread(target=self.init_blink)
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
-        self.blinking(True)
+        self.blinking(False)
         #t = Thread(target = init_blink)
-        self.t.start()
+        #self.t.start()
         #.blinking(True, 'gasoline', 'water')
         #self.blinking(False, 'water')
 
