@@ -90,7 +90,7 @@ class SensorScreen(Screen):
         self.ids.engine_temp_sensor.text = "Температура ОЖ: {} С°".format(int(ENGINE_CURRENT_TEMP))
 
         global WATER_CURRENT_LEVEL
-        WATER_CURRENT_LEVEL = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
+        WATER_CURRENT_LEVEL = int(self.convert_ohm_to_temp(30, 120, 100, 1000, hyd_temp))
         self.ids.hyd_temp_sensor.text = "Температура ГЖ: {} С°".format(int(WATER_CURRENT_LEVEL))
 
         global BATTERY_CURRENT_LEVEL
