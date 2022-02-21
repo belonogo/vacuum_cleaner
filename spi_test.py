@@ -151,8 +151,6 @@ class CleanerApp(App):
         self.body_is_up = 1
         screen_manager = ScreenManager()
         screen_manager.add_widget(BaseScreen(name='base'))
-        screen_manager.add_widget(CameraScreen(name='camera'))
-        screen_manager.add_widget(SettingsScreen(name='settings'))
         return screen_manager
 
 
