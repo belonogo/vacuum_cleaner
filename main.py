@@ -18,6 +18,12 @@ from kivy.properties import NumericProperty, BoundedNumericProperty, StringPrope
 from kivy.animation import Animation
 
 
+GASOLINE_KRIT_LVL = 0
+OVERHEAT_KRIT_LVL = 0
+WATER_KRIT_LVL = 0
+BATTERY_KRIT_LVL = 0
+IGNITION_KRIT_LVL = 0
+
 class BaseScreen(Screen):
     #t = Thread(target=self.init_blink)
 
