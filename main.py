@@ -22,18 +22,18 @@ class BaseScreen(Screen):
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
         self.blinking(True)
-        time.sleep(3)
+        time.sleep(1)
         self.blinking(False)
-        time.sleep(3)
+        time.sleep(1)
         self.blinking(True, 'gasoline', 'water')
-        time.sleep(3)
+        time.sleep(1)
         self.blinking(False, 'water')
 
     def on_stop(self):
         app.wc.stop_all()
 
     def blinking(self, turn, *args):
-        if len(args) == 0:
+        if len(args) != 0:
             for indicator in args:
                 if turn:
                     if indicator == 'gasoline':
