@@ -98,7 +98,8 @@ class BaseScreen(Screen):
 
             BATTERY_CURRENT_LEVEL = 100
             IGNITION_STATUS = 1
-            self.update_icon(FUEL_CURRENT_LEVEL)
+            fuel_level = self.wc.read_resistance(wc.FUEL_LEVEL_PIN, 25, 3.3)
+            self.update_icon(fuel_level)
             time.sleep(0.5)
 
 
