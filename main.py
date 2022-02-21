@@ -102,13 +102,17 @@ class SensorScreen(Screen):
             time.sleep(0.1)
 
     @mainthread
-    def update_sensors(self, engine_state, engine_temp, engine_oil, fuel_level, water_level):
+    def update_sensors(self, engine_state, engine_temp, hyd_temp, fuel_level, water_level):
         self.ids.engine_state_sensor.text = "Engine is " + "ON" if engine_state else "OFF"
 
-        self.ids.engine_temp_sensor.text = "Engine temp: {} С".format((engine_temp))
-        #self.ids.engine_temp_sensor.text = "Engine temp: {} С".format(int(self.convert_ohm_to_temp(30, 120, 100, 1000, 650)))
-        self.ids.engine_oil_sensor.text = "Engine oil: {} С".format(int(engine_oil))
-        self.ids.fuel_level_sensor.text = "Fuel level: {} С".format(int(fuel_level))
+        self.ids.fuel_level_sensor.text = "Уровень топлива: {} %".format(
+            int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level)))
+
+        self.ids.engine_temp_sensor.text = "Температура ОЖ: {} С°".format(
+            int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp)))
+
+        self.ids.hyd_temp_sensor.text = "Температура ГЖ: {} С°".format(
+            int(self.convert_ohm_to_temp(30, 120, 50, 500, hyd_temp)))
 
         self.ids.water_level_sensor.text = "Water level: {}".format(water_level)
 
@@ -126,13 +130,13 @@ class SensorScreen(Screen):
     def sensors_thread(self):
         while not app.stop_event.is_set():
             engine_state = self.wc.digital_read(wc.ENGINE_SENSOR_PIN)
-            engine_temp = self.wc.analog_read(3)
-            #engine_temp = self.wc.read_resistance(wc.ENGINE_TEMP_PIN, 980, 3.3)
-            engine_oil = self.wc.read_resistance(wc.ENGINE_OIL_PIN, 50, 3.3)
+
             fuel_level = self.wc.read_resistance(wc.FUEL_LEVEL_PIN, 25, 3.3)
+            engine_temp = self.wc.read_resistance(wc.ENGINE_TEMP_PIN, 980, 3.3)
+            hyd_temp = self.wc.read_resistance(wc.HYD_TEMP_PIN, 50, 3.3)
 
             water_level = self.wc.digital_read_exp(wc.WATER_LEVEL_PIN)
-            self.update_sensors(engine_state, engine_temp, engine_oil, fuel_level, water_level)
+            self.update_sensors(engine_state, engine_temp, hyd_temp, fuel_level, water_level)
             time.sleep(0.5)
         
 

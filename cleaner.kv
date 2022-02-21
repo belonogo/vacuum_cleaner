@@ -164,6 +164,21 @@
 <SensorScreen>:
 
     IndicatorText:
+        id: fuel_level_sensor
+        pos_hint: {"x": 0.05, "y": 0.75}
+        text: "Fuel level: "
+
+    IndicatorText:
+        id: engine_temp_sensor
+        pos_hint: {"x": 0.05, "y": 0.65}
+        text: "Engine temp: "
+
+    IndicatorText:
+        id: hyd_temp_sensor
+        pos_hint: {"x": 0.05, "y": 0.55}
+        text: "Engine oil: "
+
+    IndicatorText:
         id: speedometer_sensor
         pos_hint: {"x": 0.63, "y": 0.71}
         text: "Speedometer: "
@@ -174,25 +189,14 @@
         text: "Engine is "
 
     IndicatorText:
-        id: engine_temp_sensor
-        pos_hint: {"x": 0.63, "y": 0.49}
-        text: "Engine temp: "
-
-    IndicatorText:
         id: engine_oil_sensor
         pos_hint: {"x": 0.63, "y": 0.38}
         text: "Engine oil: "
 
     IndicatorText:
-        id: fuel_level_sensor
-        pos_hint: {"x": 0.63, "y": 0.27}
-        text: "Fuel level: "
-
-    IndicatorText:
         id: water_level_sensor
         pos_hint: {"x": 0.40, "y": 0.27}
         text: "Water level: "
-
 
 <BrushScreen>:
 
