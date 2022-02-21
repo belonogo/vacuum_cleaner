@@ -31,6 +31,7 @@ class BaseScreen(Screen):
         threading.Thread(target=self.update_sensors_icons).start()
         #self.blinking(False)
 
+    @mainthread
     def on_stop(self):
         app.wc.stop_all()
 
@@ -73,7 +74,6 @@ class BaseScreen(Screen):
                 self.ids.indicator_battery.opacity = 0.0
                 self.ids.indicator_ignition.opacity = 0.0
 
-    @mainthread
     def update_sensors_icons(self):
 
         self.ids.cringe.text = "{}".format(int(FUEL_CURRENT_LEVEL))
