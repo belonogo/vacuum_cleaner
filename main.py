@@ -82,16 +82,16 @@ class BaseScreen(Screen):
             self.ids.indicator_gasoline.opacity = 0.0
 
         ENGINE_CURRENT_TEMP = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
-        """if ENGINE_CURRENT_TEMP/ENGINE_CRITICAL_TEMP > 0.85:
+        if ENGINE_CURRENT_TEMP/ENGINE_CRITICAL_TEMP > 0.85:
             self.ids.indicator_overheat.opacity = 1.0
         else:
-            self.ids.indicator_overheat.opacity = 0.0"""
+            self.ids.indicator_overheat.opacity = 0.0
 
         WATER_CURRENT_LEVEL = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
-        """if WATER_CURRENT_LEVEL/WATER_CRITICAL_LEVEL <= 0.15:
+        if WATER_CURRENT_LEVEL/WATER_CRITICAL_LEVEL <= 0.15:
             self.ids.indicator_water = 1.0
         else:
-            self.ids.indicator_water = 0.0"""
+            self.ids.indicator_water = 0.0
 
         BATTERY_CURRENT_LEVEL = 100
         IGNITION_STATUS = 1
