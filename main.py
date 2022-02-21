@@ -100,10 +100,12 @@ class SensorScreen(Screen):
         self.ids.fuel_level_sensor.text = "Уровень топлива: {} %".format(
             int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level)))
         FUEL_CURRENT_LEVEL = int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level))
-        """if FUEL_CURRENT_LEVEL/FUEL_CRITICAL_LEVEL <= 15:
-            self.ids.indicator_gasoline.opacity = 1.0
+        if FUEL_CURRENT_LEVEL/FUEL_CRITICAL_LEVEL <= 15:
+            pass
+            #self.ids.indicator_gasoline.opacity = 1.0
         else:
-            self.ids.indicator_gasoline.opacity = 0.0"""
+            pass
+            #self.ids.indicator_gasoline.opacity = 0.0
 
         self.ids.engine_temp_sensor.text = "Температура ОЖ: {} С°".format(
             int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp)))
