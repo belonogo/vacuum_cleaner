@@ -120,29 +120,20 @@ class SensorScreen(Screen):
     def update_sensors(self, engine_state, engine_temp, hyd_temp, fuel_level, water_level):
         #self.ids.engine_state_sensor.text = "Engine is " + "ON" if engine_state else "OFF"
 
-        self.ids.fuel_level_sensor.text = "Уровень топлива: {} %".format(
-            int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level)))
         FUEL_CURRENT_LEVEL = int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level))
-        """if FUEL_CURRENT_LEVEL/FUEL_CRITICAL_LEVEL <= 0.15 and self.ids.indicator_gasoline.opacity == 0.0:
-            self.ids.indicator_gasoline.opacity = 1.0
-        elif FUEL_CURRENT_LEVEL/FUEL_CRITICAL_LEVEL > 0.15 and self.ids.indicator_gasoline.opacity == 1.0:
-            self.ids.indicator_gasoline.opacity = 0.0"""
+        self.ids.fuel_level_sensor.text = "Уровень топлива: {} %".format(
+            int(FUEL_CURRENT_LEVEL))
+
+
 
         self.ids.engine_temp_sensor.text = "Температура ОЖ: {} С°".format(
             int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp)))
         ENGINE_CURRENT_TEMP = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
-        """if ENGINE_CURRENT_TEMP/ENGINE_CRITICAL_TEMP > 0.85:
-            self.ids.indicator_overheat.opacity = 1.0
-        else:
-            self.ids.indicator_overheat.opacity = 0.0"""
+
 
         self.ids.hyd_temp_sensor.text = "Температура ГЖ: {} С°".format(
             int(self.convert_ohm_to_temp(30, 120, 50, 500, hyd_temp)))
         WATER_CURRENT_LEVEL = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
-        """if WATER_CURRENT_LEVEL/WATER_CRITICAL_LEVEL <= 0.15:
-            self.ids.indicator_water = 1.0
-        else:
-            self.ids.indicator_water = 0.0"""
 
         BATTERY_CURRENT_LEVEL = 100
         IGNITION_STATUS = 1
