@@ -18,14 +18,20 @@ from kivy.properties import NumericProperty, BoundedNumericProperty, StringPrope
 from kivy.animation import Animation
 
 
+GASOLINE_KRIT_LVL = 0
+OVERHEAT_KRIT_LVL = 0
+WATER_KRIT_LVL = 0
+BATTERY_KRIT_LVL = 0
+IGNITION_KRIT_LVL = 0
+
 class BaseScreen(Screen):
+    #t = Thread(target=self.init_blink)
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
-        self.blinking(True)
-        t = Thread(target = init_blink)
-        t.start()
-        #self.blinking(False)
+        self.blinking(False)
+        #t = Thread(target = init_blink)
+        #self.t.start()
         #.blinking(True, 'gasoline', 'water')
         #self.blinking(False, 'water')
 
@@ -429,8 +435,6 @@ class PasswordScreen(Screen):
         password = self.ids.input_password.text
         if password == '2022':
             self.manager.current = 'settings'
-        else:
-            self.manager.current = 'base'
         self.clear_line()
 
 
