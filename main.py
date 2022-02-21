@@ -26,7 +26,6 @@ class BaseScreen(Screen):
         self.blinking(True)
         #t = Thread(target = init_blink)
         self.t.start()
-        self.blinking(False)
         #.blinking(True, 'gasoline', 'water')
         #self.blinking(False, 'water')
 
