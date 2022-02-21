@@ -28,7 +28,6 @@ class BaseScreen(Screen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
-        threading.Thread(target=self.update_sensors_icons).start()
         #self.blinking(False)
 
     def on_stop(self):
@@ -72,10 +71,6 @@ class BaseScreen(Screen):
                 self.ids.indicator_water.opacity = 0.0
                 self.ids.indicator_battery.opacity = 0.0
                 self.ids.indicator_ignition.opacity = 0.0
-
-    @mainthread
-    def update_rez(self, temp):
-        self.ids.cringe.text = "{}".format(int(temp))
 
     def update_sensors_thread(self):
         while not app.stop_event.is_set():
