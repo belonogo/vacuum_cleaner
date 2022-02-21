@@ -18,11 +18,11 @@ from kivy.properties import NumericProperty, BoundedNumericProperty, StringPrope
 from kivy.animation import Animation
 
 
-GASOLINE_KRIT_LVL = 0
-OVERHEAT_KRIT_LVL = 0
-WATER_KRIT_LVL = 0
-BATTERY_KRIT_LVL = 0
-IGNITION_KRIT_LVL = 0
+IGNITION_STATUS = 0
+FUEL_CURRENT_LEVEL, FUEL_CRITICAL_LEVEL = 0, 100
+ENGINE_CURRENT_TEMP, ENGINE_CRITICAL_TEMP = 0, 120
+WATER_CURRENT_LEVEL, WATER_CRITICAL_LEVEL = 0, 120
+BATTERY_CURRENT_LEVEL, BATTERY_CRTICAL_LEVEL = 0, 100
 
 class BaseScreen(Screen):
     #t = Thread(target=self.init_blink)
@@ -107,14 +107,18 @@ class SensorScreen(Screen):
 
         self.ids.fuel_level_sensor.text = "Уровень топлива: {} %".format(
             int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level)))
+        FUEL_CURRENT_LEVEL = int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level))
 
         self.ids.engine_temp_sensor.text = "Температура ОЖ: {} С°".format(
             int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp)))
+        ENGINE_CURRENT_TEMP = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
 
         self.ids.hyd_temp_sensor.text = "Температура ГЖ: {} С°".format(
             int(self.convert_ohm_to_temp(30, 120, 50, 500, hyd_temp)))
+        WATER_CURRENT_LEVEL = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
 
-        self.ids.water_level_sensor.text = "Water level: {}".format(water_level)
+        BATTERY_CURRENT_LEVEL = 100
+        IGNITION_STATUS = 1
 
     def convert_ohm_to_temp(self, t_min, t_max, o_min, o_max, o_value):
         t_count = t_max - t_min + 1
