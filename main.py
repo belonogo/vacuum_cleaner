@@ -25,22 +25,13 @@ WATER_CURRENT_LEVEL, WATER_CRITICAL_LEVEL = 0, 120
 BATTERY_CURRENT_LEVEL, BATTERY_CRTICAL_LEVEL = 0, 100
 
 class BaseScreen(Screen):
-    #t = Thread(target=self.init_blink)
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
         self.blinking(False)
-        #t = Thread(target = init_blink)
-        #self.t.start()
-        #.blinking(True, 'gasoline', 'water')
-        #self.blinking(False, 'water')
 
     def on_stop(self):
         app.wc.stop_all()
-
-    def init_blink(self):
-        time.sleep(3)
-        self.blinking(False)
 
     def blinking(self, turn, *args):
         if len(args) != 0:
@@ -109,14 +100,26 @@ class SensorScreen(Screen):
         self.ids.fuel_level_sensor.text = "Уровень топлива: {} %".format(
             int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level)))
         FUEL_CURRENT_LEVEL = int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level))
+        if FUEL_CURRENT_LEVEL/FUEL_CRITICAL_LEVEL <= 15:
+            self.ids.indicator_gasoline.opacity = 1.0
+        else:
+            self.ids.indicator_gasoline.opacity = 0.0
 
         self.ids.engine_temp_sensor.text = "Температура ОЖ: {} С°".format(
             int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp)))
         ENGINE_CURRENT_TEMP = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
+        if ENGINE_CURRENT_TEMP/ENGINE_CRITICAL_TEMP > 85:
+            self.ids.indicator_overheat.opacity = 1.0
+        else:
+            self.ids.indicator_overheat.opacity = 0.0
 
         self.ids.hyd_temp_sensor.text = "Температура ГЖ: {} С°".format(
             int(self.convert_ohm_to_temp(30, 120, 50, 500, hyd_temp)))
         WATER_CURRENT_LEVEL = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
+        if WATER_CURRENT_LEVEL/WATER_CRITICAL_LEVEL <= 15:
+            self.ids.indicator_water = 1.0
+        else:
+            self.ids.indicator_water = 0.0
 
         BATTERY_CURRENT_LEVEL = 100
         IGNITION_STATUS = 1
