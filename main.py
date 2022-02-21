@@ -74,31 +74,29 @@ class BaseScreen(Screen):
                 self.ids.indicator_ignition.opacity = 0.0
 
     @mainthread
-    def update_rez(self):
-        temp = 1
+    def update_rez(self, temp):
+        self.ids.cringe.text = "{}".format(int(temp))
 
     def update_sensors_thread(self):
+        while not app.stop_event.is_set():
+            if float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) <= 0.15: #and self.ids.indicator_gasoline.opacity == 0.0:
+                self.ids.indicator_gasoline.opacity = 1.0
+            elif float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) > 0.15: #and self.ids.indicator_gasoline.opacity == 1.0:
+                self.ids.indicator_gasoline.opacity = 0.0
 
-        self.ids.cringe.text = "{}".format(int(FUEL_CURRENT_LEVEL))
+            if ENGINE_CURRENT_TEMP/ENGINE_CRITICAL_TEMP > 0.85:
+                self.ids.indicator_overheat.opacity = 1.0
+            else:
+                self.ids.indicator_overheat.opacity = 0.0
 
-        if float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) <= 0.15: #and self.ids.indicator_gasoline.opacity == 0.0:
-            self.ids.indicator_gasoline.opacity = 1.0
-        elif float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) > 0.15: #and self.ids.indicator_gasoline.opacity == 1.0:
-            self.ids.indicator_gasoline.opacity = 0.0
+            if WATER_CURRENT_LEVEL/WATER_CRITICAL_LEVEL <= 0.15:
+                self.ids.indicator_water.opacity = 1.0
+            else:
+                self.ids.indicator_water.opacity = 0.0
 
-        if ENGINE_CURRENT_TEMP/ENGINE_CRITICAL_TEMP > 0.85:
-            self.ids.indicator_overheat.opacity = 1.0
-        else:
-            self.ids.indicator_overheat.opacity = 0.0
-
-        if WATER_CURRENT_LEVEL/WATER_CRITICAL_LEVEL <= 0.15:
-            self.ids.indicator_water.opacity = 1.0
-        else:
-            self.ids.indicator_water.opacity = 0.0
-
-        BATTERY_CURRENT_LEVEL = 100
-        IGNITION_STATUS = 1
-        self.update_rez()
+            BATTERY_CURRENT_LEVEL = 100
+            IGNITION_STATUS = 1
+            self.update_rez(FUEL_CURRENT_LEVEL)
 
 
 class SensorScreen(Screen):
