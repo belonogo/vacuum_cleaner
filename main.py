@@ -28,7 +28,7 @@ class BaseScreen(Screen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
-        threading.Thread(target=self.update_sensors_icons).start()
+        threading.Thread(target=self.sensors_thread).start()
         #self.blinking(False)
 
     def on_stop(self):
@@ -92,14 +92,13 @@ class BaseScreen(Screen):
             self.ids.indicator_overheat.opacity = 0.0
 
         if WATER_CURRENT_LEVEL/WATER_CRITICAL_LEVEL <= 0.15:
-            self.ids.indicator_water = 1.0
+            self.ids.indicator_water.opacity = 1.0
         else:
-            self.ids.indicator_water = 0.0
+            self.ids.indicator_water.opacity = 0.0
 
         BATTERY_CURRENT_LEVEL = 100
         IGNITION_STATUS = 1
 
-        time.sleep(0.5)
 
 class SensorScreen(Screen):
 
