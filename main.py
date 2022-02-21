@@ -96,6 +96,8 @@ class BaseScreen(Screen):
         BATTERY_CURRENT_LEVEL = 100
         IGNITION_STATUS = 1
 
+        time.sleep(0.5)
+
 class SensorScreen(Screen):
 
     def __init__(self, **kwargs):
