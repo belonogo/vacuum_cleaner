@@ -28,6 +28,7 @@ class BaseScreen(Screen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
+        self.wc = app.wc
         threading.Thread(target=self.update_icon_thread).start()
         #self.blinking(False)
 
