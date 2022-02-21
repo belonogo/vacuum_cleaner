@@ -105,7 +105,7 @@ class SensorScreen(Screen):
     def update_sensors(self, engine_state, engine_temp, engine_oil, fuel_level, water_level):
         self.ids.engine_state_sensor.text = "Engine is " + "ON" if engine_state else "OFF"
 
-        self.ids.engine_temp_sensor.text = "Engine temp: {} С".format(int(engine_temp))
+        self.ids.engine_temp_sensor.text = "Engine temp: {} С".format((engine_temp))
         #self.ids.engine_temp_sensor.text = "Engine temp: {} С".format(int(self.convert_ohm_to_temp(30, 120, 100, 1000, 650)))
         self.ids.engine_oil_sensor.text = "Engine oil: {} С".format(int(engine_oil))
         self.ids.fuel_level_sensor.text = "Fuel level: {} С".format(int(fuel_level))
