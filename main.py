@@ -126,8 +126,8 @@ class SensorScreen(Screen):
     def sensors_thread(self):
         while not app.stop_event.is_set():
             engine_state = self.wc.digital_read(wc.ENGINE_SENSOR_PIN)
-
-            engine_temp = self.wc.read_resistance(wc.ENGINE_TEMP_PIN, 980, 3.3)
+            engine_temp = self.wc.digital_read_exp(wc.POWER_CHECK_PIN)
+            #engine_temp = self.wc.read_resistance(wc.ENGINE_TEMP_PIN, 980, 3.3)
             engine_oil = self.wc.read_resistance(wc.ENGINE_OIL_PIN, 50, 3.3)
             fuel_level = self.wc.read_resistance(wc.FUEL_LEVEL_PIN, 25, 3.3)
 
