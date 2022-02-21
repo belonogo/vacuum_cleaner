@@ -92,7 +92,7 @@ class SensorScreen(Screen):
 
     @mainthread
     def update_speedometer(self, rpm):
-        self.ids.speedometer_sensor.text = "Speedometer: " + str(rpm)
+        #self.ids.speedometer_sensor.text = "Speedometer: " + str(rpm)
 
     def speedometer_thread(self):
         while not app.stop_event.is_set():
@@ -103,7 +103,7 @@ class SensorScreen(Screen):
 
     @mainthread
     def update_sensors(self, engine_state, engine_temp, hyd_temp, fuel_level, water_level):
-        self.ids.engine_state_sensor.text = "Engine is " + "ON" if engine_state else "OFF"
+        #self.ids.engine_state_sensor.text = "Engine is " + "ON" if engine_state else "OFF"
 
         self.ids.fuel_level_sensor.text = "Уровень топлива: {} %".format(
             int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level)))
