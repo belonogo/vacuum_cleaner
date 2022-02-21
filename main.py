@@ -19,13 +19,13 @@ from kivy.animation import Animation
 
 
 class BaseScreen(Screen):
+    t = Thread(target=self.init_blink)
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
         self.blinking(True)
         #t = Thread(target = init_blink)
-        #t.start()
-        time.sleep(10)
+        self.t.start()
         self.blinking(False)
         #.blinking(True, 'gasoline', 'water')
         #self.blinking(False, 'water')
@@ -430,8 +430,6 @@ class PasswordScreen(Screen):
         password = self.ids.input_password.text
         if password == '2022':
             self.manager.current = 'settings'
-        else:
-            self.manager.current = 'base'
         self.clear_line()
 
 
