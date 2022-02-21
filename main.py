@@ -149,29 +149,39 @@ class BrushScreen(Screen):
     # Movement of the brushes (up, down, pull apart, bring closer)
     def on_brush_move_press(self, direction):
         # When the button is pressed
-        if direction == "UP":
-            self.wc.digital_write(wc.BRUSH_DOWN_PIN, 0)
-            self.wc.digital_write(wc.BRUSH_UP_PIN, 1)
-        elif direction == "DOWN":
-            self.wc.digital_write(wc.BRUSH_UP_PIN, 0)
-            self.wc.digital_write(wc.BRUSH_DOWN_PIN, 1)
-        elif direction == "CLOSE":
-            self.wc.digital_write(wc.BRUSH_APART_PIN, 0)
-            self.wc.digital_write(wc.BRUSH_CLOSE_PIN, 1)
-        elif direction == "APART":
-            self.wc.digital_write(wc.BRUSH_CLOSE_PIN, 0)
-            self.wc.digital_write(wc.BRUSH_APART_PIN, 1)
+        if direction == "L_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BRUSH_LEFT_UP_SPI_PIN)
+        elif direction == "L_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BRUSH_LEFT_DOWN_SPI_PIN)
+        elif direction == "R_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BRUSH_RIGHT_UP_SPI_PIN)
+        elif direction == "R_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BRUSH_RIGHT_DOWN_SPI_PIN)
+        elif direction == "N_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.NOZZLE_UP_SPI_PIN)
+        elif direction == "N_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.NOZZLE_DOWN_SPI_PIN)
 
     def on_brush_move_release(self, direction):
         # When the button is released
-        if direction == "UP":
-            self.wc.digital_write(wc.BRUSH_UP_PIN, 0)
-        elif direction == "DOWN":
-            self.wc.digital_write(wc.BRUSH_DOWN_PIN, 0)
-        elif direction == "CLOSE":
-            self.wc.digital_write(wc.BRUSH_CLOSE_PIN, 0)
-        elif direction == "APART":
-            self.wc.digital_write(wc.BRUSH_APART_PIN, 0)
+        if direction == "L_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+        elif direction == "L_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+        elif direction == "R_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+        elif direction == "R_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+        elif direction == "N_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+        elif direction == "N_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
 
     # Switch vacuum cleaner state if possible
     def on_vacuum_cleaner_button_release(self):
@@ -197,8 +207,8 @@ class BrushScreen(Screen):
             time.sleep(0.1) # in seconds
 
     def joystick_thread(self):
-        pins = [wc.JOYSTICK_UP_PIN, wc.JOYSTICK_DOWN_PIN, wc.JOYSTICK_LEFT_PIN, wc.JOYSTICK_RIGHT_PIN]
-        dirs = ["UP", "DOWN", "CLOSE", "APART"]
+        pins = [wc.JOYSTICK_PIN, wc.JOYSTICK_PIN, wc.JOYSTICK_PIN, wc.JOYSTICK_PIN, wc.JOYSTICK_PIN, wc.JOYSTICK_PIN]
+        dirs = ["L_UP", "L_DOWN", "R_UP", "R_DOWN", "N_UP", "N_DOWN"]
         while not app.stop_event.is_set():
             for i in range(len(pins)):
                 pin = pins[i]
@@ -339,18 +349,18 @@ class BodyScreen(Screen):
     def on_body_move_press(self, direction):
         # Button pressed
         if direction == "UP":
-            self.wc.digital_write(wc.BODY_DOWN_PIN, 0)
-            self.wc.digital_write(wc.BODY_UP_PIN, 1)
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BODY_UP_SPI_PIN)
         elif direction == "DOWN":
-            self.wc.digital_write(wc.BODY_UP_PIN, 0)
-            self.wc.digital_write(wc.BODY_DOWN_PIN, 1)
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BODY_DOWN_SPI_PIN)
 
     def on_body_move_release(self, direction):
         # Button released
         if direction == "UP":
-            self.wc.digital_write(wc.BODY_UP_PIN, 0)
+            self.wc.spi_write(wc.SPI_OFF_PIN)
         elif direction == "DOWN":
-            self.wc.digital_write(wc.BODY_DOWN_PIN, 0)
+            self.wc.spi_write(wc.SPI_OFF_PIN)
 
     # Get the state of the body (1 if body is up)
     def body_state(self):

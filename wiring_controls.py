@@ -2,7 +2,22 @@ import wiringpi as wp
 import gpioexp
 import time
 from gpiozero import AngularServo
+import spidev
 
+
+# SPI settings
+SPI_BUS = 0
+SPI_SS = 1
+SPI_CLOCK = 1000000
+SPI_OFF_PIN = 0
+BRUSH_LEFT_UP_SPI_PIN = 0x01
+BRUSH_LEFT_DOWN_SPI_PIN = 0x02
+BRUSH_RIGHT_UP_SPI_PIN = 0x04
+BRUSH_RIGHT_DOWN_SPI_PIN = 0x08
+NOZZLE_UP_SPI_PIN = 0x10
+NOZZLE_DOWN_SPI_PIN = 0x20
+BODY_UP_SPI_PIN = 0x40
+BODY_DOWN_SPI_PIN = 0x80
 
 # WiringPi Numbering
 BRUSH_UP_PIN = 6
@@ -29,10 +44,8 @@ ENGINE_STOP_PIN = 22
 TACHOMETER_PIN = 26
 SPEEDOMETER_PIN = 23
 
-JOYSTICK_UP_PIN = 24
-JOYSTICK_DOWN_PIN = 27
-JOYSTICK_LEFT_PIN = 25
-JOYSTICK_RIGHT_PIN = 28
+JOYSTICK_PIN = 24
+
 ENGINE_SENSOR_PIN = 29
 
 # Expander (analog) pins
@@ -55,6 +68,7 @@ PWM_DC_RANGE = 1024
 
 class WiringControls:
     def __init__(self):
+
         # setup WiringPi
         wp.wiringPiSetup()
         self.exp = gpioexp.gpioexp()
@@ -154,3 +168,9 @@ class WiringControls:
         self.set_pwm_dc(BRUSH_PIN, LOW)
 
 
+    def spi_write(self, pin):
+        spi = spidev.SpiDev(SPI_BUS, SPI_SS)
+        spi.max_speed_hz = SPI_CLOCK
+        send = [0, pin]
+        spi.xfer(send)
+        spi.close()
