@@ -28,6 +28,7 @@ class BaseScreen(Screen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
+        threading.Thread(target=self.update_sensors_icons).start()
         #self.blinking(False)
 
     def on_stop(self):
