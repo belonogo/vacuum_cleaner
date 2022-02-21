@@ -76,9 +76,9 @@ class BaseScreen(Screen):
     def update_sensors_icons(self):
 
         FUEL_CURRENT_LEVEL = int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level))
-        if FUEL_CURRENT_LEVEL/FUEL_CRITICAL_LEVEL <= 0.15 and self.ids.indicator_gasoline.opacity == 0.0:
+        if FUEL_CURRENT_LEVEL/FUEL_CRITICAL_LEVEL <= 0.15: #and self.ids.indicator_gasoline.opacity == 0.0:
             self.ids.indicator_gasoline.opacity = 0.0
-        elif FUEL_CURRENT_LEVEL/FUEL_CRITICAL_LEVEL > 0.15 and self.ids.indicator_gasoline.opacity == 1.0:
+        elif FUEL_CURRENT_LEVEL/FUEL_CRITICAL_LEVEL > 0.15: #and self.ids.indicator_gasoline.opacity == 1.0:
             self.ids.indicator_gasoline.opacity = 1.0
 
         ENGINE_CURRENT_TEMP = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
