@@ -200,14 +200,14 @@
         id: brush_up_button
         background_normal: "Graphics/Brush/narr_up_normal.tif"
         background_down: "Graphics/Brush/narr_up_pressed.tif"
-        pos_hint: {"x": 0.060, "y": 0.632}
+        pos_hint: {"x": 0.060, "y": 0.5} # 0.632
         on_press: root.on_brush_move_press('L_UP')
         on_release: root.on_brush_move_release('L_UP')
 
     Label:
         text: "Левая щетка"
         size_hint: (0.103, 0.182)
-        pos_hint: {"x": 0.060, "y": 0.4}
+        pos_hint: {"x": 0.060, "y": 0.6}
 
     ArrowButton:
         id: brush_down_button
@@ -221,14 +221,14 @@
         id: brush_up_button_2
         background_normal: "Graphics/Brush/narr_up_normal.tif"
         background_down: "Graphics/Brush/narr_up_pressed.tif"
-        pos_hint: {"x": 0.230, "y": 0.632}
+        pos_hint: {"x": 0.230, "y": 0.5}
         on_press: root.on_brush_move_press('R_UP')
         on_release: root.on_brush_move_release('R_UP')
 
     Label:
         text: "Сопло"
         size_hint: (0.103, 0.182)
-        pos_hint: {"x": 0.230, "y": 0.4}
+        pos_hint: {"x": 0.230, "y": 0.6}
 
     ArrowButton:
         id: brush_down_button_2
@@ -242,14 +242,14 @@
         id: brush_up_button_3
         background_normal: "Graphics/Brush/narr_up_normal.tif"
         background_down: "Graphics/Brush/narr_up_pressed.tif"
-        pos_hint: {"x": 0.400, "y": 0.632}
+        pos_hint: {"x": 0.400, "y": 0.5}
         on_press: root.on_brush_move_press('N_UP')
         on_release: root.on_brush_move_release('N_UP')
 
     Label:
         text: "Правая щетка"
         size_hint: (0.103, 0.182)
-        pos_hint: {"x": 0.400, "y": 0.4}
+        pos_hint: {"x": 0.400, "y": 0.6}
 
     ArrowButton:
         id: brush_down_button_3
