@@ -23,8 +23,8 @@ class BaseScreen(Screen):
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
         self.blinking(True)
-        t = Thread(target = init_blink)
-        t.start()
+        #t = Thread(target = init_blink)
+        #t.start()
         #self.blinking(False)
         #.blinking(True, 'gasoline', 'water')
         #self.blinking(False, 'water')
