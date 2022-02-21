@@ -345,18 +345,18 @@ class BodyScreen(Screen):
     def on_body_move_press(self, direction):
         # Button pressed
         if direction == "UP":
-            self.wc.digital_write(wc.BODY_DOWN_PIN, 0)
-            self.wc.digital_write(wc.BODY_UP_PIN, 1)
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BODY_UP_PIN)
         elif direction == "DOWN":
-            self.wc.digital_write(wc.BODY_UP_PIN, 0)
-            self.wc.digital_write(wc.BODY_DOWN_PIN, 1)
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BODY_DOWN_PIN)
 
     def on_body_move_release(self, direction):
         # Button released
         if direction == "UP":
-            self.wc.digital_write(wc.BODY_UP_PIN, 0)
+            self.wc.spi_write(wc.SPI_OFF_PIN)
         elif direction == "DOWN":
-            self.wc.digital_write(wc.BODY_DOWN_PIN, 0)
+            self.wc.spi_write(wc.SPI_OFF_PIN)
 
     # Get the state of the body (1 if body is up)
     def body_state(self):
