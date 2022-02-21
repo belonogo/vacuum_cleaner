@@ -163,6 +163,8 @@ class WiringControls:
     def spi_write(self, pin):
         spi = spidev.SpiDev(SPI_BUS, SPI_SS)
         spi.max_speed_hz = SPI_CLOCK
+        send = [0, 0]
+        spi.xfer(send)
         send = [0, pin]
         spi.xfer(send)
         spi.close()
