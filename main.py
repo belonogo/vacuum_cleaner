@@ -346,10 +346,10 @@ class BodyScreen(Screen):
         # Button pressed
         if direction == "UP":
             self.wc.spi_write(wc.SPI_OFF_PIN)
-            self.wc.spi_write(wc.BODY_UP_PIN)
+            self.wc.spi_write(wc.BODY_UP_SPI_PIN)
         elif direction == "DOWN":
             self.wc.spi_write(wc.SPI_OFF_PIN)
-            self.wc.spi_write(wc.BODY_DOWN_PIN)
+            self.wc.spi_write(wc.BODY_DOWN_SPI_PIN)
 
     def on_body_move_release(self, direction):
         # Button released
