@@ -5,11 +5,12 @@ from gpiozero import AngularServo
 import spidev
 
 
-# SPI settings
+# SPI settings and pins
 SPI_BUS = 0
 SPI_SS = 1
 SPI_CLOCK = 1000000
 SPI_OFF_PIN = 0
+SPI_POWER_PIN = 6
 BRUSH_LEFT_UP_SPI_PIN = 0x01
 BRUSH_LEFT_DOWN_SPI_PIN = 0x02
 BRUSH_RIGHT_UP_SPI_PIN = 0x04
@@ -19,41 +20,31 @@ NOZZLE_DOWN_SPI_PIN = 0x20
 BODY_UP_SPI_PIN = 0x40
 BODY_DOWN_SPI_PIN = 0x80
 
-# WiringPi Numbering
-BRUSH_UP_PIN = 6
-BRUSH_DOWN_PIN = 5
-BRUSH_APART_PIN = 3 # APART for pushing the brushes apart
-BRUSH_CLOSE_PIN = 4 # CLOSE for bringing the brushes closer
+# GPIO pins
+SPEEDOMETER_PIN = 0
 BRUSH_PIN = 1
-BODY_UP_PIN = 24
-BODY_DOWN_PIN = 0
-VACUUM_CLEANER_SWITCH_PIN = 7
-
-# !!! Collision with JOYSTICK pins!
 BRUSH_SWITCH_PIN = 2
-WATER_SWITCH_PIN = 27
-
-# !!! not wiringPi numbering
-ENGINE_SPEED_PIN = 15 # wiringPi 16 / RX
-# !!! end of not wiringPi numbering
-
-BODY_STATE_PIN = 10
-#PIN THAT IS ALWAYS HIGH = 11
-ENGINE_START_PIN = 21
-ENGINE_STOP_PIN = 22
+VACUUM_CLEANER_SWITCH_PIN = 3
+WATER_SWITCH_PIN = 4
+BODY_STATE_PIN = 5
+ENGINE_START_PIN = 7
+ENGINE_SPEED_PIN = 15
+ENGINE_STOP_PIN = 21
+ENGINE_SENSOR_PIN = 22
 TACHOMETER_PIN = 26
-SPEEDOMETER_PIN = 23
-
-JOYSTICK_PIN = 24
-
-ENGINE_SENSOR_PIN = 29
+# Joystick management
+JOYSTICK_UP_PIN = 23
+JOYSTICK_DOWN_PIN = 24
+JOYSTICK_L_BRUSH_PIN = 27
+JOYSTICK_R_BRUSH_PIN = 25
+JOYSTICK_NOZZLE_PIN = 28
+JOYSTICK_ALL_PIN = 29
 
 # Expander (analog) pins
-ENGINE_TEMP_PIN = 3
-ENGINE_OIL_PIN = 2
-FUEL_LEVEL_PIN = 1
 WATER_LEVEL_PIN = 0
-
+FUEL_LEVEL_PIN = 1
+ENGINE_OIL_PIN = 2
+ENGINE_TEMP_PIN = 3
 FLASHER_PIN = 4
 LIGHTS_PIN = 5
 HYDRAPUMP_PIN = 6
@@ -72,12 +63,6 @@ class WiringControls:
         # setup WiringPi
         wp.wiringPiSetup()
         self.exp = gpioexp.gpioexp()
-        wp.pinMode(BRUSH_UP_PIN, wp.GPIO.OUTPUT)
-        wp.pinMode(BRUSH_DOWN_PIN, wp.GPIO.OUTPUT)
-        wp.pinMode(BRUSH_APART_PIN, wp.GPIO.OUTPUT)
-        wp.pinMode(BRUSH_CLOSE_PIN, wp.GPIO.OUTPUT)
-        wp.pinMode(BODY_UP_PIN, wp.GPIO.OUTPUT)
-        wp.pinMode(BODY_DOWN_PIN, wp.GPIO.OUTPUT)
         wp.pinMode(VACUUM_CLEANER_SWITCH_PIN, wp.GPIO.OUTPUT)
         wp.pinMode(ENGINE_START_PIN, wp.GPIO.OUTPUT)
         wp.pinMode(ENGINE_STOP_PIN, wp.GPIO.OUTPUT)
@@ -151,22 +136,15 @@ class WiringControls:
 
     def engine_speed_servo(self, val):
         self.engine_servo.value = val
-        
 
     def stop_all(self):
-        self.digital_write(BRUSH_UP_PIN, LOW)
-        self.digital_write(BRUSH_DOWN_PIN, LOW)
-        self.digital_write(BRUSH_APART_PIN, LOW)
-        self.digital_write(BRUSH_CLOSE_PIN, LOW)
-        self.digital_write(BODY_UP_PIN, LOW)
-        self.digital_write(BODY_DOWN_PIN, LOW)
+        self.digital_write(SPI_POWER_PIN, LOW)
         self.digital_write(VACUUM_CLEANER_SWITCH_PIN, LOW)
         self.digital_write(ENGINE_START_PIN, LOW)
         self.digital_write(ENGINE_STOP_PIN, LOW)
         self.digital_write(BRUSH_SWITCH_PIN, LOW)
         self.digital_write(WATER_SWITCH_PIN, LOW)
         self.set_pwm_dc(BRUSH_PIN, LOW)
-
 
     def spi_write(self, pin):
         spi = spidev.SpiDev(SPI_BUS, SPI_SS)
