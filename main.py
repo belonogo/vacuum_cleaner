@@ -157,6 +157,12 @@ class BrushScreen(Screen):
         elif direction == "R_DOWN":
             self.wc.spi_write(wc.SPI_OFF_PIN)
             self.wc.spi_write(wc.BRUSH_RIGHT_DOWN_SPI_PIN)
+        elif direction == "N_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.NOZZLE_UP_SPI_PIN)
+        elif direction == "N_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.NOZZLE_DOWN_SPI_PIN)
 
     def on_brush_move_release(self, direction):
         # When the button is released
@@ -167,6 +173,10 @@ class BrushScreen(Screen):
         elif direction == "R_UP":
             self.wc.spi_write(wc.SPI_OFF_PIN)
         elif direction == "R_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+        elif direction == "N_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+        elif direction == "N_DOWN":
             self.wc.spi_write(wc.SPI_OFF_PIN)
 
     # Switch vacuum cleaner state if possible
@@ -193,8 +203,8 @@ class BrushScreen(Screen):
             time.sleep(0.1) # in seconds
 
     def joystick_thread(self):
-        pins = [wc.JOYSTICK_UP_PIN, wc.JOYSTICK_DOWN_PIN, wc.JOYSTICK_LEFT_PIN, wc.JOYSTICK_RIGHT_PIN]
-        dirs = ["L_UP", "L_DOWN", "R_UP", "R_DOWN"]
+        pins = [wc.JOYSTICK_PIN, wc.JOYSTICK_PIN, wc.JOYSTICK_PIN, wc.JOYSTICK_PIN, wc.JOYSTICK_PIN, wc.JOYSTICK_PIN]
+        dirs = ["L_UP", "L_DOWN", "R_UP", "R_DOWN", "N_UP", "N_DOWN"]
         while not app.stop_event.is_set():
             for i in range(len(pins)):
                 pin = pins[i]
