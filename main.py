@@ -1,6 +1,7 @@
 from functools import partial
 from subprocess import call
 import threading
+from threading import Thread
 import time
 import cv2
 import wiring_controls as wc
@@ -22,15 +23,18 @@ class BaseScreen(Screen):
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
         self.blinking(True)
-        time.sleep(1)
-        self.blinking(False)
-        time.sleep(1)
-        self.blinking(True, 'gasoline', 'water')
-        time.sleep(1)
-        self.blinking(False, 'water')
+        t = Thread(target = init_blink)
+        t.start()
+        #self.blinking(False)
+        #.blinking(True, 'gasoline', 'water')
+        #self.blinking(False, 'water')
 
     def on_stop(self):
         app.wc.stop_all()
+
+    def init_blink(self):
+        time.sleep(3)
+        self.blinking(False)
 
     def blinking(self, turn, *args):
         if len(args) != 0:
