@@ -28,6 +28,7 @@ class BaseScreen(Screen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
+        threading.Thread(target=self.update_icon_thread).start()
         #self.blinking(False)
 
     def on_stop(self):
@@ -73,7 +74,11 @@ class BaseScreen(Screen):
                 self.ids.indicator_battery.opacity = 0.0
                 self.ids.indicator_ignition.opacity = 0.0
 
-    def update_sensors_thread(self):
+    @mainthread
+    def update_icon(self, temp):
+        self.ids.cringe.text = temp
+
+    def update_icon_thread(self):
         while not app.stop_event.is_set():
             if float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) <= 0.15: #and self.ids.indicator_gasoline.opacity == 0.0:
                 self.ids.indicator_gasoline.opacity = 1.0
@@ -92,7 +97,8 @@ class BaseScreen(Screen):
 
             BATTERY_CURRENT_LEVEL = 100
             IGNITION_STATUS = 1
-            self.update_rez(FUEL_CURRENT_LEVEL)
+            self.update_icon(FUEL_CURRENT_LEVEL)
+            time.sleep(0.5)
 
 
 class SensorScreen(Screen):
