@@ -344,18 +344,18 @@ class BodyScreen(Screen):
     # Movement of the body of the vehicle (up, down)
     def on_body_move_press(self, direction):
         # Button pressed
-        if direction == "UP":
+        if direction == "B_UP":
             self.wc.spi_write(wc.SPI_OFF_PIN)
             self.wc.spi_write(wc.BODY_UP_SPI_PIN)
-        elif direction == "DOWN":
+        elif direction == "B_DOWN":
             self.wc.spi_write(wc.SPI_OFF_PIN)
             self.wc.spi_write(wc.BODY_DOWN_SPI_PIN)
 
     def on_body_move_release(self, direction):
         # Button released
-        if direction == "UP":
+        if direction == "B_UP":
             self.wc.spi_write(wc.SPI_OFF_PIN)
-        elif direction == "DOWN":
+        elif direction == "B_DOWN":
             self.wc.spi_write(wc.SPI_OFF_PIN)
 
     # Get the state of the body (1 if body is up)
