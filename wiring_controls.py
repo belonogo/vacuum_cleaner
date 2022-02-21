@@ -2,7 +2,13 @@ import wiringpi as wp
 import gpioexp
 import time
 from gpiozero import AngularServo
+import spidev
 
+
+# SPI settings
+SPI_BUS = 0
+SPI_SS = 1
+SPI_CLOCK = 1000000
 
 # WiringPi Numbering
 BRUSH_UP_PIN = 6
@@ -154,3 +160,9 @@ class WiringControls:
         self.set_pwm_dc(BRUSH_PIN, LOW)
 
 
+    def spi_write(self, pin):
+        spi = spidev.SpiDev(SPI_BUS, SPI_SS)
+        spi.max_speed_hz = SPI_CLOCK
+        send = [0, pin]
+        spi.xfer(send)
+        spi.close()
