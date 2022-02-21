@@ -75,7 +75,7 @@ class BaseScreen(Screen):
 
     @mainthread
     def update_rez(self):
-        self.update_sensors_icons()
+        self.update_sensors_thread()
 
     def update_sensors_thread(self):
 
