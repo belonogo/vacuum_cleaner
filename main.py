@@ -77,7 +77,7 @@ class BaseScreen(Screen):
     @mainthread
     def update_icon(self, temp):
         self.ids.cringe.text = "{} %".format(
-            int(temp))
+            float(temp))
 
     def update_icon_thread(self):
         while not app.stop_event.is_set():
