@@ -76,7 +76,7 @@ class BaseScreen(Screen):
     @mainthread
     def update_sensors_icons(self):
 
-        self.ids.cringe.text = "{}".format(float(FUEL_CURRENT_LEVEL))
+        self.ids.cringe.text = "{}".format(float(ENGINE_CURRENT_TEMP))
 
         if float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) <= 0.15: #and self.ids.indicator_gasoline.opacity == 0.0:
             self.ids.indicator_gasoline.opacity = 1.0
