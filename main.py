@@ -28,63 +28,20 @@ class BaseScreen(Screen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
-        self.wc = app.wc
         threading.Thread(target=self.update_icon_thread).start()
-        #self.blinking(False)
 
     def on_stop(self):
         app.wc.stop_all()
 
-
-    def blinking(self, turn, *args):
-        if len(args) != 0:
-            for indicator in args:
-                if turn:
-                    if indicator == 'gasoline':
-                        self.ids.indicator_gasoline.opacity = 1.0
-                    elif indicator == 'overheat':
-                        self.ids.indicator_overheat.opacity = 1.0
-                    elif indicator == 'water':
-                        self.ids.indicator_water.opacity = 1.0
-                    elif indicator == 'battery':
-                        self.ids.indicator_battery.opacity = 1.0
-                    elif indicator == 'ignition':
-                        self.ids.indicator_ignition.opacity = 1.0
-                else:
-                    if indicator == 'gasoline':
-                        self.ids.indicator_gasoline.opacity = 0.0
-                    elif indicator == 'overheat':
-                        self.ids.indicator_overheat.opacity = 0.0
-                    elif indicator == 'water':
-                        self.ids.indicator_water.opacity = 0.0
-                    elif indicator == 'battery':
-                        self.ids.indicator_battery.opacity = 0.0
-                    elif indicator == 'ignition':
-                        self.ids.indicator_ignition.opacity = 0.0
-        else:
-            if turn:
-                self.ids.indicator_gasoline.opacity = 1.0
-                self.ids.indicator_overheat.opacity = 1.0
-                self.ids.indicator_water.opacity = 1.0
-                self.ids.indicator_battery.opacity = 1.0
-                self.ids.indicator_ignition.opacity = 1.0
-            else:
-                self.ids.indicator_gasoline.opacity = 0.0
-                self.ids.indicator_overheat.opacity = 0.0
-                self.ids.indicator_water.opacity = 0.0
-                self.ids.indicator_battery.opacity = 0.0
-                self.ids.indicator_ignition.opacity = 0.0
-
     @mainthread
     def update_icon(self, temp):
-        self.ids.cringe.text = "{} %".format(
-            float(temp))
+        pass
 
     def update_icon_thread(self):
         while not app.stop_event.is_set():
-            if float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) <= 0.15: #and self.ids.indicator_gasoline.opacity == 0.0:
+            if float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) <= 0.15:
                 self.ids.indicator_gasoline.opacity = 1.0
-            elif float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) > 0.15: #and self.ids.indicator_gasoline.opacity == 1.0:
+            elif float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) > 0.15:
                 self.ids.indicator_gasoline.opacity = 0.0
 
             if ENGINE_CURRENT_TEMP/ENGINE_CRITICAL_TEMP > 0.85:
@@ -97,10 +54,7 @@ class BaseScreen(Screen):
             else:
                 self.ids.indicator_water.opacity = 0.0
 
-            BATTERY_CURRENT_LEVEL = 100
-            IGNITION_STATUS = 1
-            fuel_level = self.wc.read_resistance(wc.FUEL_LEVEL_PIN, 25, 3.3)
-            self.update_icon(FUEL_CURRENT_LEVEL)
+            self.update_icon()
             time.sleep(0.5)
 
 
@@ -126,25 +80,23 @@ class SensorScreen(Screen):
 
     @mainthread
     def update_sensors(self, engine_state, engine_temp, hyd_temp, fuel_level, water_level):
-        #self.ids.engine_state_sensor.text = "Engine is " + "ON" if engine_state else "OFF"
 
         global FUEL_CURRENT_LEVEL
         FUEL_CURRENT_LEVEL = int(self.convert_ohm_to_temp(0, 100, 10, 1000, fuel_level))
-        self.ids.fuel_level_sensor.text = "Уровень топлива: {} %".format(
-            int(FUEL_CURRENT_LEVEL))
+        self.ids.fuel_level_sensor.text = "Уровень топлива: {} %".format(int(FUEL_CURRENT_LEVEL))
 
-
-
-        self.ids.engine_temp_sensor.text = "Температура ОЖ: {} С°".format(
-            int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp)))
+        global ENGINE_CURRENT_TEMP
         ENGINE_CURRENT_TEMP = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
+        self.ids.engine_temp_sensor.text = "Температура ОЖ: {} С°".format(int(ENGINE_CURRENT_TEMP))
 
-
-        self.ids.hyd_temp_sensor.text = "Температура ГЖ: {} С°".format(
-            int(self.convert_ohm_to_temp(30, 120, 50, 500, hyd_temp)))
+        global WATER_CURRENT_LEVEL
         WATER_CURRENT_LEVEL = int(self.convert_ohm_to_temp(30, 120, 100, 1000, engine_temp))
+        self.ids.hyd_temp_sensor.text = "Температура ГЖ: {} С°".format(int(WATER_CURRENT_LEVEL))
 
+        global BATTERY_CURRENT_LEVEL
         BATTERY_CURRENT_LEVEL = 100
+
+        global IGNITION_STATUS
         IGNITION_STATUS = 1
 
     def convert_ohm_to_temp(self, t_min, t_max, o_min, o_max, o_value):
