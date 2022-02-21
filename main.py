@@ -34,7 +34,7 @@ class BaseScreen(Screen):
         app.wc.stop_all()
 
     @mainthread
-    def update_icon(self, temp):
+    def update_icon(self):
         pass
 
     def update_icon_thread(self):
