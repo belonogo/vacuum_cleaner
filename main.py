@@ -75,9 +75,9 @@ class BaseScreen(Screen):
     @mainthread
     def update_sensors_icons(self):
 
-        if float(FUEL_CURRENT_LEVEL)/FUEL_CRITICAL_LEVEL <= 0.15: #and self.ids.indicator_gasoline.opacity == 0.0:
+        if float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) <= 0.15: #and self.ids.indicator_gasoline.opacity == 0.0:
             self.ids.indicator_gasoline.opacity = 1.0
-        elif FUEL_CURRENT_LEVEL/FUEL_CRITICAL_LEVEL > 0.15: #and self.ids.indicator_gasoline.opacity == 1.0:
+        elif float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) > 0.15: #and self.ids.indicator_gasoline.opacity == 1.0:
             self.ids.indicator_gasoline.opacity = 0.0
 
         if ENGINE_CURRENT_TEMP/ENGINE_CRITICAL_TEMP > 0.85:
