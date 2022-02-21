@@ -146,7 +146,7 @@ class BrushScreen(Screen):
     def on_brush_move_press(self, direction):
         # When the button is pressed
         if direction == "UP":
-            self.wc.digital_write(wc.BRUSH_DOWN_PIN, 0)
+            self.wc.spi_write(0)
             self.wc.spi_write(1)
         elif direction == "DOWN":
             self.wc.digital_write(wc.BRUSH_UP_PIN, 0)
@@ -161,7 +161,7 @@ class BrushScreen(Screen):
     def on_brush_move_release(self, direction):
         # When the button is released
         if direction == "UP":
-            self.wc.digital_write(wc.BRUSH_UP_PIN, 0)
+            self.wc.spi_write(0)
         elif direction == "DOWN":
             self.wc.digital_write(wc.BRUSH_DOWN_PIN, 0)
         elif direction == "CLOSE":

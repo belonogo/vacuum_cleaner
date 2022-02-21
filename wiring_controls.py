@@ -166,6 +166,4 @@ class WiringControls:
         spi.max_speed_hz = SPI_CLOCK
         send = [0, pin]
         spi.xfer(send)
-        send = [0, 0]
-        spi.xfer(send)
         spi.close()
