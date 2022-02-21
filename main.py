@@ -149,8 +149,8 @@ class BrushScreen(Screen):
             self.wc.spi_write(0)
             self.wc.spi_write(1)
         elif direction == "DOWN":
-            self.wc.digital_write(wc.BRUSH_UP_PIN, 0)
-            self.wc.digital_write(wc.BRUSH_DOWN_PIN, 1)
+            self.wc.spi_write(0)
+            self.wc.spi_write(2)
         elif direction == "CLOSE":
             self.wc.digital_write(wc.BRUSH_APART_PIN, 0)
             self.wc.digital_write(wc.BRUSH_CLOSE_PIN, 1)
@@ -163,7 +163,7 @@ class BrushScreen(Screen):
         if direction == "UP":
             self.wc.spi_write(0)
         elif direction == "DOWN":
-            self.wc.digital_write(wc.BRUSH_DOWN_PIN, 0)
+            self.wc.spi_write(0)
         elif direction == "CLOSE":
             self.wc.digital_write(wc.BRUSH_CLOSE_PIN, 0)
         elif direction == "APART":
