@@ -22,8 +22,11 @@ class BaseScreen(Screen):
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
         self.blinking(True)
+        time.sleep(1)
         self.blinking(False)
+        time.sleep(1)
         self.blinking(True, 'gasoline', 'water')
+        time.sleep(1)
         self.blinking(False, 'water')
 
     def on_stop(self):
