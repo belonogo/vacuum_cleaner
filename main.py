@@ -145,29 +145,29 @@ class BrushScreen(Screen):
     # Movement of the brushes (up, down, pull apart, bring closer)
     def on_brush_move_press(self, direction):
         # When the button is pressed
-        if direction == "UP":
-            self.wc.spi_write(0)
-            self.wc.spi_write(1)
-        elif direction == "DOWN":
-            self.wc.spi_write(0)
-            self.wc.spi_write(2)
-        elif direction == "CLOSE":
-            self.wc.digital_write(wc.BRUSH_APART_PIN, 0)
-            self.wc.digital_write(wc.BRUSH_CLOSE_PIN, 1)
-        elif direction == "APART":
-            self.wc.digital_write(wc.BRUSH_CLOSE_PIN, 0)
-            self.wc.digital_write(wc.BRUSH_APART_PIN, 1)
+        if direction == "L_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BRUSH_LEFT_UP_SPI_PIN)
+        elif direction == "L_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BRUSH_LEFT_DOWN_SPI_PIN)
+        elif direction == "R_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BRUSH_RIGHT_UP_SPI_PIN)
+        elif direction == "R_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+            self.wc.spi_write(wc.BRUSH_RIGHT_DOWN_SPI_PIN)
 
     def on_brush_move_release(self, direction):
         # When the button is released
-        if direction == "UP":
-            self.wc.spi_write(0)
-        elif direction == "DOWN":
-            self.wc.spi_write(0)
-        elif direction == "CLOSE":
-            self.wc.digital_write(wc.BRUSH_CLOSE_PIN, 0)
-        elif direction == "APART":
-            self.wc.digital_write(wc.BRUSH_APART_PIN, 0)
+        if direction == "L_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+        elif direction == "L_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+        elif direction == "R_UP":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
+        elif direction == "R_DOWN":
+            self.wc.spi_write(wc.SPI_OFF_PIN)
 
     # Switch vacuum cleaner state if possible
     def on_vacuum_cleaner_button_release(self):
@@ -194,7 +194,7 @@ class BrushScreen(Screen):
 
     def joystick_thread(self):
         pins = [wc.JOYSTICK_UP_PIN, wc.JOYSTICK_DOWN_PIN, wc.JOYSTICK_LEFT_PIN, wc.JOYSTICK_RIGHT_PIN]
-        dirs = ["UP", "DOWN", "CLOSE", "APART"]
+        dirs = ["L_UP", "L_DOWN", "R_UP", "R_DOWN"]
         while not app.stop_event.is_set():
             for i in range(len(pins)):
                 pin = pins[i]
