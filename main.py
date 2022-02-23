@@ -65,6 +65,7 @@ class BaseScreen(Screen):
             power_state = self.wc.digital_read(wc.POWER_CHECK_PIN)
             self.ids.test_text.text = "{}".format(power_state)
             if power_state == 0:
+                pass
                 #time.sleep(30)
                 #os.system("shutdown now -h")
             self.update_icon()
