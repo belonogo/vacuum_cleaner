@@ -3,6 +3,7 @@ from subprocess import call
 import threading
 from threading import Thread
 import time
+import os
 import cv2
 import wiring_controls as wc
 from kivy.core.window import Window
@@ -65,7 +66,7 @@ class BaseScreen(Screen):
             self.ids.test_text.text = "{}".format(power_state)
             if power_state == 0:
                 time.sleep(30)
-                call("sudo shutdown -h now", shell=False)
+                os.system("shutdown now -h")
             self.update_icon()
             time.sleep(0.5)
 
