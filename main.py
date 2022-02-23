@@ -63,7 +63,6 @@ class BaseScreen(Screen):
     def check_power_thread(self):
         while not app.stop_event.is_set():
             power_state = self.wc.digital_read(wc.POWER_CHECK_PIN)
-            self.ids.test_text.text = "{}".format(power_state)
             if power_state == 0:
                 pass
                 #time.sleep(30)
