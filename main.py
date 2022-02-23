@@ -24,10 +24,12 @@ ENGINE_CURRENT_TEMP, ENGINE_CRITICAL_TEMP = 0, 120
 WATER_CURRENT_LEVEL, WATER_CRITICAL_LEVEL = 0, 120
 BATTERY_CURRENT_LEVEL, BATTERY_CRTICAL_LEVEL = 0, 100
 
+
 class BaseScreen(Screen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
+        self.wc = app.wc
         threading.Thread(target=self.update_icon_thread).start()
 
     def on_stop(self):
@@ -53,9 +55,18 @@ class BaseScreen(Screen):
                 self.ids.indicator_water.opacity = 1.0
             else:
                 self.ids.indicator_water.opacity = 0.0
-
             self.update_icon()
             time.sleep(0.5)
+
+    def check_power_thread(self):
+        while not app.stop_event.is_set():
+            power_state = self.wc.digital_read(wc.POWER_CHECK_PIN)
+            if power_state == 0:
+                time.sleep(30)
+                call("sudo shutdown -h now", shell=False)
+            self.update_icon()
+            time.sleep(0.5)
+
 
 
 class SensorScreen(Screen):
