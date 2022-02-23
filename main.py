@@ -69,7 +69,6 @@ class BaseScreen(Screen):
                 #time.sleep(30)
                 #os.system("shutdown now -h")
             self.update_icon()
-            time.sleep(0.5)
 
 
 
