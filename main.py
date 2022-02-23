@@ -31,7 +31,7 @@ class BaseScreen(Screen):
         super(BaseScreen, self).__init__(**kwargs)
         self.wc = app.wc
         threading.Thread(target=self.update_icon_thread).start()
-        threading.Thread(target=self.check_power_thread()).start()
+        threading.Thread(target=self.check_power_thread).start()
 
     def on_stop(self):
         app.wc.stop_all()
