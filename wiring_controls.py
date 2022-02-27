@@ -69,6 +69,7 @@ class WiringControls:
         wp.pinMode(ENGINE_STOP_PIN, wp.GPIO.OUTPUT)
         wp.pinMode(BRUSH_SWITCH_PIN, wp.GPIO.OUTPUT)
         wp.pinMode(WATER_SWITCH_PIN, wp.GPIO.OUTPUT)
+        wp.pinMode(POWER_CHECK_PIN, wp.GPIO.INPUT)
 
         # HARD PWM wiringPi
         wp.pwmSetClock(PWM_CLOCK)
