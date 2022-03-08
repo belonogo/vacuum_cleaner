@@ -87,7 +87,7 @@ class WiringControls:
         #wp.pinMode(JOYSTICK_LEFT_PIN, wp.GPIO.INPUT) # !!!
         #wp.pinMode(JOYSTICK_RIGHT_PIN, wp.GPIO.INPUT) # !!!
         wp.pinMode(ENGINE_SENSOR_PIN, wp.GPIO.INPUT)
-        wp.pinMode(POWER_CHECK_PIN, 0)
+        wp.pinMode(POWER_CHECK_PIN, wp.GPIO.INPUT)
         self.engine_servo = AngularServo(ENGINE_SPEED_PIN, min_pulse_width = 0.5/1000, max_pulse_width = 2.1/1000)
 
 
