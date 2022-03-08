@@ -69,7 +69,6 @@ class WiringControls:
         wp.pinMode(ENGINE_STOP_PIN, wp.GPIO.OUTPUT)
         wp.pinMode(BRUSH_SWITCH_PIN, wp.GPIO.OUTPUT)
         wp.pinMode(WATER_SWITCH_PIN, wp.GPIO.OUTPUT)
-        wp.pinMode(POWER_CHECK_PIN, wp.GPIO.INPUT)
 
         # HARD PWM wiringPi
         wp.pwmSetClock(PWM_CLOCK)
@@ -88,7 +87,7 @@ class WiringControls:
         #wp.pinMode(JOYSTICK_LEFT_PIN, wp.GPIO.INPUT) # !!!
         #wp.pinMode(JOYSTICK_RIGHT_PIN, wp.GPIO.INPUT) # !!!
         wp.pinMode(ENGINE_SENSOR_PIN, wp.GPIO.INPUT)
-
+        wp.pinMode(POWER_CHECK_PIN, 0)
         self.engine_servo = AngularServo(ENGINE_SPEED_PIN, min_pulse_width = 0.5/1000, max_pulse_width = 2.1/1000)
 
 
