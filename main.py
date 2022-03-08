@@ -73,11 +73,9 @@ class BaseScreen(Screen):
             current_power_level = self.wc.analog_read(wc.FLASHER_PIN)
             power_state = 1
             if current_power_level > 0.4:
-                global POWER_STATUS
                 power_state = 1
                 POWER_STATUS = power_state
             else:
-                global POWER_STATUS
                 power_state = 0
                 POWER_STATUS = power_state
             self.ids.test_text.text = "{}".format(power_state)
