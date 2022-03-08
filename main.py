@@ -18,8 +18,6 @@ from kivy.uix.scatter import Scatter
 from kivy.properties import NumericProperty, BoundedNumericProperty, StringProperty
 from kivy.animation import Animation
 
-
-POWER_STATUS = 1
 IGNITION_STATUS = 0
 FUEL_CURRENT_LEVEL, FUEL_CRITICAL_LEVEL = 0, 100
 ENGINE_CURRENT_TEMP, ENGINE_CRITICAL_TEMP = 0, 120
@@ -32,6 +30,7 @@ class BaseScreen(Screen):
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
         self.wc = app.wc
+        self.POWER_STATUS = 1
         threading.Thread(target=self.update_icon_thread).start()
         threading.Thread(target=self.check_power_thread).start()
 
@@ -60,7 +59,7 @@ class BaseScreen(Screen):
             else:
                 self.ids.indicator_water.opacity = 0.0
 
-            if POWER_STATUS == 1:
+            if self.POWER_STATUS == 1:
                 self.ids.indicator_ignition.opacity = 1.0
             else:
                 self.ids.indicator_ignition.opacity = 0.0
@@ -74,10 +73,10 @@ class BaseScreen(Screen):
             power_state = 1
             if current_power_level > 0.4:
                 power_state = 1
-                POWER_STATUS = power_state
+                self.POWER_STATUS = power_state
             else:
                 power_state = 0
-                POWER_STATUS = power_state
+                self.POWER_STATUS = power_state
             self.ids.test_text.text = "{}".format(power_state)
             if power_state == 0:
                 pass
