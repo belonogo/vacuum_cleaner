@@ -19,6 +19,7 @@ from kivy.properties import NumericProperty, BoundedNumericProperty, StringPrope
 from kivy.animation import Animation
 
 
+POWER_STATUS = 0
 IGNITION_STATUS = 0
 FUEL_CURRENT_LEVEL, FUEL_CRITICAL_LEVEL = 0, 100
 ENGINE_CURRENT_TEMP, ENGINE_CRITICAL_TEMP = 0, 120
@@ -43,6 +44,7 @@ class BaseScreen(Screen):
 
     def update_icon_thread(self):
         while not app.stop_event.is_set():
+
             if float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) <= 0.15:
                 self.ids.indicator_gasoline.opacity = 1.0
             elif float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) > 0.15:
@@ -57,12 +59,27 @@ class BaseScreen(Screen):
                 self.ids.indicator_water.opacity = 1.0
             else:
                 self.ids.indicator_water.opacity = 0.0
+
+            if POWER_STATUS == 1:
+                self.ids.indicator_water.opacity = 1.0
+            else:
+                self.ids.indicator_water.opacity = 0.0
+
             self.update_icon()
             time.sleep(0.5)
 
     def check_power_thread(self):
         while not app.stop_event.is_set():
-            power_state = self.wc.analog_read(wc.FLASHER_PIN)
+            current_power_level = self.wc.analog_read(wc.FLASHER_PIN)
+            power_state = 1
+            if current_power_level > 0.4:
+                power_state = 1
+                global POWER_STATUS
+                POWER_STATUS = power_state
+            else:
+                power_state = 0
+                global POWER_STATUS
+                POWER_STATUS = power_state
             self.ids.test_text.text = "{}".format(power_state)
             if power_state == 0:
                 pass
