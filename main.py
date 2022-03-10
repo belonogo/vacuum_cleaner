@@ -132,7 +132,12 @@ class SensorScreen(Screen):
         global BATTERY_CURRENT_LEVEL
         BATTERY_CURRENT_LEVEL = 100
 
-        self.ids.hyd_temp_sensor.text = "Статус двигателя: {}".format(IGNITION_STATUS)
+        IGNITION_STATUS_STRING = "выключен"
+        if IGNITION_STATUS == 1:
+            IGNITION_STATUS_STRING = "включен"
+        else:
+            IGNITION_STATUS_STRING = "выключен"
+        self.ids.eng_status_sensor.text = "Статус двигателя: {}".format(IGNITION_STATUS_STRING)
 
     def convert_ohm_to_temp(self, t_min, t_max, o_min, o_max, o_value):
         t_count = t_max - t_min + 1
