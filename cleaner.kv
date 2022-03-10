@@ -306,28 +306,10 @@
         pos_hint: {"right": 0.68, "y": 0.484}
         size_hint: (0.188, 0.154)
 
-    Label:
-        id: hyd_temp_label
-        text: "-1"
-        font_size: root.height * 0.08
-        text_size: self.size
-        valign: "middle"
-        pos_hint: {"right": 0.68, "y": 0.490}
-        size_hint: (0.099, 0.154)
-
     Image:
         source: "Graphics/Engine/Eng_temp.tif"
         pos_hint: {"right": 0.68, "y": 0.318}
         size_hint: (0.188, 0.154)
-
-    Label:
-        id: eng_temp_label
-        text: "-1"
-        font_size: root.height * 0.08
-        text_size: self.size
-        valign: "middle"
-        pos_hint: {"right": 0.68, "y": 0.324}
-        size_hint: (0.099, 0.154)
 
     WideButton:
         id: engine_start_button
@@ -348,17 +330,6 @@
         source: "Graphics/Engine/motohours_frame.tif"
         pos_hint: {"right": 0.986, "top": 0.435}
         size_hint: (0.230, 0.113)
-
-    Label:
-        id: motohours_label
-        text: "-1"
-        font_size: root.height * 0.08
-        text_size: self.size
-        halign: "right"
-        valign: "middle"
-        pos_hint: {"right": 0.976, "top": 0.420}
-        size_hint: (0.210, 0.083)
-
 
 <BodyScreen>:
 

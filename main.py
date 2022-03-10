@@ -291,7 +291,8 @@ class EngineScreen(Screen):
 
     @mainthread
     def update_motohours(self, motohours):
-        self.ids.motohours_label.text = str(motohours)
+        pass
+        #self.ids.motohours_label.text = str(motohours)
 
     def motohours_thread(self):
         while not app.stop_event.is_set():
@@ -306,8 +307,8 @@ class EngineScreen(Screen):
     @mainthread
     def update_sensors(self, rpm, hyd_temp, eng_temp):
         self.ids.engine_tachometer_gauge.value = rpm
-        self.ids.hyd_temp_label.text = str(hyd_temp)
-        self.ids.eng_temp_label.text = str(eng_temp)
+        #self.ids.hyd_temp_label.text = str(hyd_temp)
+        #self.ids.eng_temp_label.text = str(eng_temp)
 
     def sensors_thread(self):
         while not app.stop_event.is_set():
