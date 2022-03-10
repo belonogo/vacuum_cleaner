@@ -33,6 +33,7 @@ class BaseScreen(Screen):
         self.POWER_STATUS = 1
         threading.Thread(target=self.update_icon_thread).start()
         threading.Thread(target=self.check_power_thread).start()
+        threading.Thread(target=self.update_fuel_status).start()
 
     def on_stop(self):
         app.wc.stop_all()
@@ -85,6 +86,11 @@ class BaseScreen(Screen):
             self.update_icon()
             time.sleep(0.1)
 
+    def update_fuel_status(self):
+        while not app.stop_event.is_set():
+            self.ids.gasoline_text.text = "{}".format(int(FUEL_CURRENT_LEVEL))
+            self.update_icon()
+            time.sleep(0.1)
 
 
 class SensorScreen(Screen):
