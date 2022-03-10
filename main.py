@@ -309,8 +309,8 @@ class EngineScreen(Screen):
         self.ids.engine_tachometer_gauge.value = rpm
         eng_temp = int(self.convert_ohm_to_temp(30, 120, 100, 1000, eng_temp))
         hyd_temp = int(self.convert_ohm_to_temp(30, 120, 100, 1000, hyd_temp))
-        self.ids.hyd_temp_text.text = "{}".format(int(hyd_temp))
-        self.ids.eng_temp_text.text = "{}".format(int(eng_temp))
+        #self.ids.hyd_temp_text.text = "{}".format(int(hyd_temp))
+        #self.ids.eng_temp_text.text = "{}".format(int(eng_temp))
 
     def sensors_thread(self):
         while not app.stop_event.is_set():
