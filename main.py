@@ -88,7 +88,7 @@ class BaseScreen(Screen):
 
     def update_fuel_status(self):
         while not app.stop_event.is_set():
-            self.ids.gasoline_text.text = "{}".format(int(FUEL_CURRENT_LEVEL))
+            self.ids.gasoline_text.text = "{}%".format(int(FUEL_CURRENT_LEVEL))
             self.update_icon()
             time.sleep(0.1)
 
