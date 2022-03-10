@@ -301,15 +301,14 @@
         pos_hint: {"right": 0.68, "y": 0.650}
         on_release: root.on_hydrapump_release()
 
-    IndicatorText:
-        id: hyd_temp_text
-        pos_hint: {"x": 0.6, "y": 0.455}
+    Label:
+        id: hyd_temp_label
         text: "000"
-
-    IndicatorText:
-        id: eng_temp_text
-        pos_hint: {"x": 0.6, "y": 0.400}
-        text: "000"
+        font_size: root.height * 0.08
+        text_size: self.size
+        valign: "middle"
+        pos_hint: {"right": 0.68, "y": 0.490}
+        size_hint: (0.099, 0.154)
 
     Image:
         source: "Graphics/Engine/Hyd_temp.tif"
