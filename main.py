@@ -480,7 +480,7 @@ class PasswordScreen(Screen):
         self.clear_line()
 
     def back_to_main_screen(self):
-        self.ids.base_sm.current = 'brush'
+        self.manager.current = 'base'
 
 
 class CleanerApp(App):
