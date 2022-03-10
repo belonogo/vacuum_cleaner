@@ -479,6 +479,9 @@ class PasswordScreen(Screen):
             self.manager.current = 'settings'
         self.clear_line()
 
+    def back_to_main_screen(self):
+        self.ids.base_sm.current = 'brush'
+
 
 class CleanerApp(App):
 
