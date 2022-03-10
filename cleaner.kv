@@ -89,11 +89,6 @@
             BodyScreen:
                 name: "body"
 
-        IndicatorText:
-            id: test_text
-            pos_hint: {"x": 0.600, "y": 0.861}
-            text: "text"
-
         IndicatorIcon:
             id: indicator_gasoline
             source: "Graphics/share/Lamp_gasolin_low.tif"
@@ -187,6 +182,11 @@
         id: hyd_temp_sensor
         pos_hint: {"x": 0.05, "y": 0.55}
         text: "Engine oil: "
+
+    IndicatorText:
+        id: eng_status_sensor
+        pos_hint: {"x": 0.05, "y": 0.45}
+        text: "Engine status: "
 
 <BrushScreen>:
 

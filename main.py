@@ -78,7 +78,8 @@ class BaseScreen(Screen):
             else:
                 power_state = 0
                 self.POWER_STATUS = power_state
-            self.ids.test_text.text = "{}".format(power_state)
+            global IGNITION_STATUS
+            IGNITION_STATUS = power_state
             if power_state == 0:
                 pass
                 #time.sleep(30)
@@ -131,8 +132,7 @@ class SensorScreen(Screen):
         global BATTERY_CURRENT_LEVEL
         BATTERY_CURRENT_LEVEL = 100
 
-        global IGNITION_STATUS
-        IGNITION_STATUS = 1
+        self.ids.hyd_temp_sensor.text = "Статус двигателя: {}".format(IGNITION_STATUS)
 
     def convert_ohm_to_temp(self, t_min, t_max, o_min, o_max, o_value):
         t_count = t_max - t_min + 1
