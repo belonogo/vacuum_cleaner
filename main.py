@@ -307,17 +307,15 @@ class EngineScreen(Screen):
     @mainthread
     def update_sensors(self, rpm, hyd_temp, eng_temp):
         self.ids.engine_tachometer_gauge.value = rpm
-        eng_temp = int(self.convert_ohm_to_temp(30, 120, 100, 1000, eng_temp))
-        hyd_temp = int(self.convert_ohm_to_temp(30, 120, 100, 1000, hyd_temp))
-        #self.ids.hyd_temp_text.text = "{}".format(int(hyd_temp))
-        #self.ids.eng_temp_text.text = "{}".format(int(eng_temp))
+        self.ids.hyd_temp_text.text = str(hyd_temp)
+        self.ids.eng_temp_text.text = str(eng_temp)
 
     def sensors_thread(self):
         while not app.stop_event.is_set():
             rpm = self.wc.read_rps(wc.TACHOMETER_PIN, rev_val=0) * 60
-            engine_temp = self.wc.read_resistance(wc.ENGINE_TEMP_PIN, 980, 3.3)
-            hyd_temp = self.wc.read_resistance(wc.HYD_TEMP_PIN, 50, 3.3)
-            self.update_sensors(rpm, hyd_temp, engine_temp)
+            hyd_temp = self.wc.read_resistance(wc.HYD_TEMP_PIN, 300, 3.3)
+            eng_temp = self.wc.read_resistance(wc.ENGINE_TEMP_PIN, 300, 3.3)
+            self.update_sensors(rpm, hyd_temp, eng_temp)
             time.sleep(0.1)
 
     def on_engine_start_press(self):
@@ -339,17 +337,6 @@ class EngineScreen(Screen):
 
     def on_stop(self):
         app.motohours_f.close()
-
-    def convert_ohm_to_temp(self, t_min, t_max, o_min, o_max, o_value):
-        t_count = t_max - t_min + 1
-        o_count = o_max - o_min + 1
-        to_coeff = o_count / t_count
-        o_k = o_value - o_min + 1
-        t_k = round(o_k / to_coeff)
-        t_value = t_min + t_k - 1
-        if t_k < 1:
-            t_value = t_min
-        return t_value
 
 
 class BodyScreen(Screen):
