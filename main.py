@@ -76,6 +76,7 @@ class BaseScreen(Screen):
             if self.IS_START == 1:
                 time.sleep(5)
                 self.IS_START = 0
+
             else:
                 current_power_level = self.wc.analog_read(wc.POWER_CHECK_PIN)
             power_state = 1
