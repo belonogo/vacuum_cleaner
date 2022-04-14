@@ -88,9 +88,6 @@ class BaseScreen(Screen):
             time.sleep(0.1)
 
     def shutdown(self):
-        if self.IS_START == 1:
-            time.sleep(5)
-            self.IS_START = 0
         while not app.stop_event.is_set():
             if self.POWER_STATUS == 0:
                 self.ids.shutdown_text.text = "{}".format("ВЫКЛЮЧЕНИЕ")
