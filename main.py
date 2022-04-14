@@ -88,12 +88,14 @@ class BaseScreen(Screen):
             time.sleep(0.1)
 
     def shutdown(self):
-        time.sleep(5)
         while not app.stop_event.is_set():
             if self.POWER_STATUS == 0:
                 power_state = 0
+                self.ids.shutdown_text.text = "{}".format("ВЫКЛЮЧЕНИЕ")
                 time.sleep(30)
-                os.system("shutdown now -h")
+                #os.system("shutdown now -h")
+            else:
+                self.ids.shutdown_text.text = "{}".format("ПИТАНИЕ ЕСТЬ")
             self.update_icon()
             time.sleep(0.1)
 
