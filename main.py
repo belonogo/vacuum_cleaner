@@ -92,7 +92,7 @@ class BaseScreen(Screen):
         while not app.stop_event.is_set():
             if self.POWER_STATUS == 0:
                 self.ids.shutdown_text.text = "{}".format("ВЫКЛЮЧЕНИЕ")
-                #time.sleep(5)
+                time.sleep(5)
                 #os.system("shutdown now -h")
             else:
                 self.ids.shutdown_text.text = "{}".format("ПИТАНИЕ ЕСТЬ")
