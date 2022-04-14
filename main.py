@@ -34,6 +34,7 @@ class BaseScreen(Screen):
         threading.Thread(target=self.update_icon_thread).start()
         threading.Thread(target=self.check_power_thread).start()
         threading.Thread(target=self.update_fuel_status).start()
+        threading.Thread(target=self.shutdown).start()
         self.ids.base_sm.current = 'brush'
 
     def on_stop(self):
@@ -70,7 +71,6 @@ class BaseScreen(Screen):
             time.sleep(0.5)
 
     def check_power_thread(self):
-        time.sleep(2)
         while not app.stop_event.is_set():
             current_power_level = self.wc.analog_read(wc.POWER_CHECK_PIN)
             power_state = 1
@@ -83,6 +83,15 @@ class BaseScreen(Screen):
             global IGNITION_STATUS
             IGNITION_STATUS = power_state
 
+            self.update_icon()
+            time.sleep(0.1)
+
+    def shutdown(self):
+        while not app.stop_event.is_set():
+            if self.POWER_STATUS == 0:
+                power_state = 0
+                # time.sleep(30)
+                # os.system("shutdown now -h")
             self.update_icon()
             time.sleep(0.1)
 
