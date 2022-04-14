@@ -230,12 +230,14 @@ class BrushScreen(Screen):
                 value = i
                 self.ids.slider_value.text = "value: {}".format(int(value))
                 self.wc.set_pwm_dc(wc.BRUSH_PIN, int(value))
+                time.sleep(0.00976)
         elif self.vacuum_cleaner_state == 1:
             # If the vacuum cleaner is enabled,
             # then we can disable it regardless of the body state.
             self.wc.digital_write(wc.VACUUM_CLEANER_SWITCH_PIN, 0)
             self.vacuum_cleaner_state = 0
             self.ids.vacuum_cleaner_button.background_normal = "Graphics/Brush/Vacuum_button_normal.tif"
+            self.wc.set_pwm_dc(wc.BRUSH_PIN, int(0))
 
     # Separate thread for disabling vacuum cleaner on body_is_up
     def body_state_thread(self):
