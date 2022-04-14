@@ -46,9 +46,6 @@ class BaseScreen(Screen):
         pass
 
     def update_icon_thread(self):
-        if self.IS_START == 1:
-            time.sleep(5)
-            self.IS_START = 0
         while not app.stop_event.is_set():
 
             if float(FUEL_CURRENT_LEVEL)/float(FUEL_CRITICAL_LEVEL) <= 0.15:
@@ -76,7 +73,11 @@ class BaseScreen(Screen):
 
     def check_power_thread(self):
         while not app.stop_event.is_set():
-            current_power_level = self.wc.analog_read(wc.POWER_CHECK_PIN)
+            if self.IS_START == 1:
+                time.sleep(5)
+                self.IS_START = 0
+            else:
+                current_power_level = self.wc.analog_read(wc.POWER_CHECK_PIN)
             power_state = 1
             if current_power_level > 0.4:
                 power_state = 1
