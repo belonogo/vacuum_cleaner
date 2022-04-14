@@ -399,6 +399,7 @@ class BodyScreen(Screen):
         if direction == "B_UP":
             self.wc.spi_write(wc.SPI_OFF_PIN)
             self.wc.spi_write(wc.BODY_UP_SPI_PIN)
+            self.wc.digital_write(wc.LIGHTS_PIN, 1)
         elif direction == "B_DOWN":
             self.wc.spi_write(wc.SPI_OFF_PIN)
             self.wc.spi_write(wc.BODY_DOWN_SPI_PIN)
