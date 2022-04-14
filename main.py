@@ -407,6 +407,7 @@ class BodyScreen(Screen):
     def on_body_move_release(self, direction):
         # Button released
         if direction == "B_UP":
+            self.wc.digital_write(wc.LIGHTS_PIN, 1)
             self.wc.spi_write(wc.SPI_OFF_PIN)
         elif direction == "B_DOWN":
             self.wc.spi_write(wc.SPI_OFF_PIN)
