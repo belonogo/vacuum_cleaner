@@ -178,7 +178,7 @@ class BrushScreen(Screen):
 
     def on_brush_speed_value(self, instance, value):
         value = value / instance.max * wc.PWM_DC_RANGE
-        self.ids.slider_value.text = "value: {} %".format(int(value))
+        #self.ids.slider_value.text = "value: {} %".format(int(value))
         self.wc.set_pwm_dc(wc.BRUSH_PIN, int(value))
 
     # Movement of the brushes (up, down, pull apart, bring closer)
