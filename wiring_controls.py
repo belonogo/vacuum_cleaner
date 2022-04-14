@@ -74,7 +74,7 @@ class WiringControls:
         wp.pwmSetClock(PWM_CLOCK)
         wp.pwmSetRange(PWM_DC_RANGE)
         wp.pinMode(BRUSH_PIN, wp.GPIO.PWM_OUTPUT)
-        wp.pinMode(LIGHTS_PIN, wp.GPIO.PWM_OUTPUT)
+        wp.pinMode(LIGHTS_PIN, wp.GPIO.OUTPUT)
         # mark-space mode
         wp.pwmSetMode(wp.GPIO.PWM_MODE_MS)
 
