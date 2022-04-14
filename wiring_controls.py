@@ -31,13 +31,13 @@ ENGINE_START_PIN = 7
 ENGINE_SPEED_PIN = 15
 ENGINE_STOP_PIN = 21
 ENGINE_SENSOR_PIN = 22
-LIGHTS_PIN = 23
+LIGHTS_PIN = 25
 TACHOMETER_PIN = 26
 # Joystick management
 JOYSTICK_UP_PIN = 16
 JOYSTICK_DOWN_PIN = 24
 JOYSTICK_L_BRUSH_PIN = 27
-JOYSTICK_R_BRUSH_PIN = 25
+JOYSTICK_R_BRUSH_PIN = 23
 JOYSTICK_NOZZLE_PIN = 28
 JOYSTICK_ALL_PIN = 29
 
@@ -140,6 +140,7 @@ class WiringControls:
         self.engine_servo.value = val
 
     def stop_all(self):
+        self.digital_write(LIGHTS_PIN, LOW)
         self.digital_write(SPI_POWER_PIN, LOW)
         self.digital_write(VACUUM_CLEANER_SWITCH_PIN, LOW)
         self.digital_write(ENGINE_START_PIN, LOW)
