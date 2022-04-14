@@ -31,7 +31,6 @@ class BaseScreen(Screen):
         super(BaseScreen, self).__init__(**kwargs)
         self.wc = app.wc
         self.POWER_STATUS = 1
-        self.IS_START = 1
         self.TICK_COUNTER = 30
         threading.Thread(target=self.update_icon_thread).start()
         threading.Thread(target=self.check_power_thread).start()
@@ -92,15 +91,10 @@ class BaseScreen(Screen):
 
     def shutdown(self):
         while not app.stop_event.is_set():
-            if self.IS_START == 0:
-                if self.POWER_STATUS == 0:
-                    time.sleep(30)
-                    #os.system("shutdown now -h")
+            if self.TICK_COUNTER == 0:
+                os.system("shutdown now -h")
                 self.update_icon()
                 time.sleep(0.1)
-            else:
-                time.sleep(10)
-                self.IS_START = 0
 
     def timer(self):
         while not app.stop_event.is_set():
