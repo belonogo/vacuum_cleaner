@@ -386,11 +386,11 @@ class BodyScreen(Screen):
     def on_lights_release(self):
         if self.lights is True:
             self.lights = False
-            self.wc.digital_write_exp(wc.LIGHTS_PIN, 0)
+            self.wc.digital_write(wc.LIGHTS_PIN, 0)
             self.ids.lights_button.background_normal = "Graphics/Body/Lights_off.tif"
         else:
             self.lights = True
-            self.wc.digital_write_exp(wc.LIGHTS_PIN, 1)
+            self.wc.digital_write(wc.LIGHTS_PIN, 1)
             self.ids.lights_button.background_normal = "Graphics/Body/Lights_on.tif"
 
     # Movement of the body of the vehicle (up, down)
