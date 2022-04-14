@@ -32,6 +32,7 @@ class BaseScreen(Screen):
         self.wc = app.wc
         self.POWER_STATUS = 1
         threading.Thread(target=self.update_icon_thread).start()
+        time.sleep(5)
         threading.Thread(target=self.check_power_thread).start()
         threading.Thread(target=self.update_fuel_status).start()
         threading.Thread(target=self.shutdown).start()
