@@ -102,9 +102,11 @@ class BaseScreen(Screen):
 
     def timer(self):
         while not app.stop_event.is_set():
-
-            self.update_icon()
+            self.ids.tick_counter.text = "{}".format(int(self.TICK_COUNTER))
+            self.TICK_COUNTER += 1;
             time.sleep(1)
+            self.update_icon()
+
 
     def update_fuel_status(self):
         while not app.stop_event.is_set():
