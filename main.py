@@ -36,6 +36,7 @@ class BaseScreen(Screen):
         threading.Thread(target=self.update_icon_thread).start()
         threading.Thread(target=self.check_power_thread).start()
         threading.Thread(target=self.update_fuel_status).start()
+        threading.Thread(target=self.timer).start()
         threading.Thread(target=self.shutdown).start()
         self.ids.base_sm.current = 'brush'
 
