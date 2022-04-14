@@ -32,6 +32,7 @@ class BaseScreen(Screen):
         self.wc = app.wc
         self.POWER_STATUS = 1
         self.IS_START = 1
+        self.TICK_COUNTER = 0
         threading.Thread(target=self.update_icon_thread).start()
         threading.Thread(target=self.check_power_thread).start()
         threading.Thread(target=self.update_fuel_status).start()
@@ -98,6 +99,12 @@ class BaseScreen(Screen):
             else:
                 time.sleep(10)
                 self.IS_START = 0
+
+    def timer(self):
+        while not app.stop_event.is_set():
+
+            self.update_icon()
+            time.sleep(1)
 
     def update_fuel_status(self):
         while not app.stop_event.is_set():
