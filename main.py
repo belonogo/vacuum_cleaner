@@ -84,7 +84,7 @@ class BaseScreen(Screen):
             IGNITION_STATUS = power_state
             if power_state == 0:
                 power_state = 0
-                #time.sleep(30)
+                time.sleep(30)
                 os.system("shutdown now -h")
             self.update_icon()
             time.sleep(0.1)
