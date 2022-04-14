@@ -226,14 +226,12 @@ class BrushScreen(Screen):
             self.wc.digital_write(wc.VACUUM_CLEANER_SWITCH_PIN, 1)
             self.vacuum_cleaner_state = 1
             self.ids.vacuum_cleaner_button.background_normal = "Graphics/Brush/Vacuum_button_pressed.tif"
-            def vacuum_on():
-                for i in range(1025):
-                    value = i
-                    self.ids.slider_value.text = "value: {}".format(int(value))
-                    self.wc.set_pwm_dc(wc.BRUSH_PIN, int(value))
-                    time.sleep(0.00976)
-            threading = Thread(targe=vacuum_on())
-            threading.start()
+            for i in range(1025):
+                value = i
+                self.ids.slider_value.text = "value: {}".format(int(value))
+                self.wc.set_pwm_dc(wc.BRUSH_PIN, int(value))
+                time.sleep(0.00976)
+
 
         elif self.vacuum_cleaner_state == 1:
             # If the vacuum cleaner is enabled,
