@@ -92,7 +92,7 @@ class BaseScreen(Screen):
             if self.IS_START == 0:
                 if self.POWER_STATUS == 0:
                     time.sleep(30)
-                    os.system("shutdown now -h")
+                    #os.system("shutdown now -h")
                 self.update_icon()
                 time.sleep(0.1)
             else:
