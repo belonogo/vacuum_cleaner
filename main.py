@@ -31,11 +31,10 @@ class BaseScreen(Screen):
         super(BaseScreen, self).__init__(**kwargs)
         self.wc = app.wc
         self.POWER_STATUS = 1
-        self.IS_START = 1;
+        self.IS_START = 1
         threading.Thread(target=self.update_icon_thread).start()
         threading.Thread(target=self.check_power_thread).start()
         threading.Thread(target=self.update_fuel_status).start()
-        time.sleep(5)
         threading.Thread(target=self.shutdown).start()
         self.ids.base_sm.current = 'brush'
 
@@ -89,6 +88,9 @@ class BaseScreen(Screen):
             time.sleep(0.1)
 
     def shutdown(self):
+        if self.IS_START == 1:
+            time.sleep(5)
+            self.IS_START = 0
         while not app.stop_event.is_set():
             if self.POWER_STATUS == 0:
                 self.ids.shutdown_text.text = "{}".format("ВЫКЛЮЧЕНИЕ")
