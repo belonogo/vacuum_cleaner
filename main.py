@@ -70,6 +70,7 @@ class BaseScreen(Screen):
             time.sleep(0.5)
 
     def check_power_thread(self):
+        time.sleep(2)
         while not app.stop_event.is_set():
             current_power_level = self.wc.analog_read(wc.POWER_CHECK_PIN)
             power_state = 1
