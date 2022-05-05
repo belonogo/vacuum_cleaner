@@ -187,7 +187,8 @@ class BrushScreen(Screen):
         self.wc = app.wc
         # If vacuum cleaner is working or not
         self.vacuum_cleaner_state = 0
-        self.brush = False
+        self.l_brush = False
+        self.r_brush = False
         self.water = False
         threading.Thread(target=self.body_state_thread).start()
         threading.Thread(target=self.joystick_thread).start()
@@ -277,18 +278,31 @@ class BrushScreen(Screen):
                     if not app.stop_event.is_set():
                         self.on_brush_move_release(dir)
 
-    def on_brush_button_release(self):
+    def on_brush_l_button_release(self):
         print("Brush button pressed!")
-        if self.brush is True:
-            self.brush = False
+        if self.l_brush is True:
+            self.l_brush = False
             self.wc.digital_write(wc.BRUSH_SWITCH_PIN, 0)
             print("brush written 0")
-            self.ids.brush_button.background_normal = "Graphics/Brush/Brush_button_normal.tif"
+            self.ids.brush_button_l.background_normal = "Graphics/Brush/Brush_l_button_normal.tif"
         else:
-            self.brush = True
+            self.l_brush = True
             self.wc.digital_write(wc.BRUSH_SWITCH_PIN, 1)
             print("brush written 1")
-            self.ids.brush_button.background_normal = "Graphics/Brush/Brush_button_pressed.tif"
+            self.ids.brush_button_l.background_normal = "Graphics/Brush/Brush_l_button_pressed.tif"
+
+    def on_brush_r_button_release(self):
+        print("Brush button pressed!")
+        if self.r_brush is True:
+            self.r_brush = False
+            self.wc.digital_write(wc.BRUSH_SWITCH_PIN, 0)
+            print("brush written 0")
+            self.ids.brush_button_r.background_normal = "Graphics/Brush/Brush_r_button_normal.tif"
+        else:
+            self.r_brush = True
+            self.wc.digital_write(wc.BRUSH_SWITCH_PIN, 1)
+            print("brush written 1")
+            self.ids.brush_button_r.background_normal = "Graphics/Brush/Brush_r_button_pressed.tif"
 
     def on_water_button_release(self):
         print("Water button pressed!")
