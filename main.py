@@ -413,11 +413,11 @@ class BodyScreen(Screen):
     def on_flasher_release(self):
         if self.flasher is True:
             self.flasher = False
-            self.wc.digital_write_exp(wc.FLASHER_PIN, 0)
+            self.wc.digital_write(wc.FLASHER_PIN, 0)
             self.ids.flasher_button.background_normal = "Graphics/Body/Flasher_off.tif"
         else:
             self.flasher = True
-            self.wc.digital_write_exp(wc.FLASHER_PIN, 1)
+            self.wc.digital_write(wc.FLASHER_PIN, 1)
             self.ids.flasher_button.background_normal = "Graphics/Body/Flasher_on.tif"
 
     def on_lights_release(self):

@@ -23,8 +23,7 @@ BODY_DOWN_SPI_PIN = 0x80
 # GPIO pins
 SPEEDOMETER_PIN = 0
 BRUSH_PIN = 1
-BRUSH_L_SWITCH_PIN = 28
-BRUSH_R_SWITCH_PIN = 29
+
 VACUUM_CLEANER_SWITCH_PIN = 3
 WATER_SWITCH_PIN = 4
 BODY_STATE_PIN = 5
@@ -34,6 +33,9 @@ ENGINE_STOP_PIN = 21
 ENGINE_SENSOR_PIN = 22
 LIGHTS_PIN = 25
 TACHOMETER_PIN = 26
+FLASHER_PIN = 27
+BRUSH_L_SWITCH_PIN = 28
+BRUSH_R_SWITCH_PIN = 29
 # Joystick management
 
 """
@@ -50,7 +52,6 @@ WATER_LEVEL_PIN = 0
 FUEL_LEVEL_PIN = 1
 ENGINE_OIL_PIN = 2
 ENGINE_TEMP_PIN = 3
-FLASHER_PIN = 4
 POWER_CHECK_PIN = 5
 HYDRAPUMP_PIN = 6
 HYD_TEMP_PIN = 7
@@ -80,6 +81,7 @@ class WiringControls:
         wp.pwmSetRange(PWM_DC_RANGE)
         wp.pinMode(BRUSH_PIN, wp.GPIO.PWM_OUTPUT)
         wp.pinMode(LIGHTS_PIN, wp.GPIO.OUTPUT)
+        wp.pinMode(FLASHER_PIN, wp.GPIO.OUTPUT)
         # mark-space mode
         wp.pwmSetMode(wp.GPIO.PWM_MODE_MS)
 
@@ -146,6 +148,7 @@ class WiringControls:
 
     def stop_all(self):
         self.digital_write(LIGHTS_PIN, LOW)
+        self.digital_write(FLASHER_PIN, LOW)
         self.digital_write(SPI_POWER_PIN, LOW)
         self.digital_write(VACUUM_CLEANER_SWITCH_PIN, LOW)
         self.digital_write(ENGINE_START_PIN, LOW)
