@@ -283,12 +283,12 @@ class BrushScreen(Screen):
         if self.l_brush is True:
             self.l_brush = False
             self.wc.digital_write(wc.BRUSH_SWITCH_PIN, 0)
-            print("brush written 0")
+            print("brush_l written 0")
             self.ids.brush_button_l.background_normal = "Graphics/Brush/Brush_l_button_normal.tif"
         else:
             self.l_brush = True
             self.wc.digital_write(wc.BRUSH_SWITCH_PIN, 1)
-            print("brush written 1")
+            print("brush_l written 1")
             self.ids.brush_button_l.background_normal = "Graphics/Brush/Brush_l_button_pressed.tif"
 
     def on_brush_r_button_release(self):
@@ -296,12 +296,12 @@ class BrushScreen(Screen):
         if self.r_brush is True:
             self.r_brush = False
             self.wc.digital_write(wc.BRUSH_SWITCH_PIN, 0)
-            print("brush written 0")
+            print("brush_r written 0")
             self.ids.brush_button_r.background_normal = "Graphics/Brush/Brush_r_button_normal.tif"
         else:
             self.r_brush = True
             self.wc.digital_write(wc.BRUSH_SWITCH_PIN, 1)
-            print("brush written 1")
+            print("brush_r written 1")
             self.ids.brush_button_r.background_normal = "Graphics/Brush/Brush_r_button_pressed.tif"
 
     def on_water_button_release(self):
