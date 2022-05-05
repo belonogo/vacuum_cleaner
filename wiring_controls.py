@@ -23,7 +23,8 @@ BODY_DOWN_SPI_PIN = 0x80
 # GPIO pins
 SPEEDOMETER_PIN = 0
 BRUSH_PIN = 1
-BRUSH_SWITCH_PIN = 2
+BRUSH_L_SWITCH_PIN = 28
+BRUSH_R_SWITCH_PIN = 29
 VACUUM_CLEANER_SWITCH_PIN = 3
 WATER_SWITCH_PIN = 4
 BODY_STATE_PIN = 5
@@ -34,12 +35,15 @@ ENGINE_SENSOR_PIN = 22
 LIGHTS_PIN = 25
 TACHOMETER_PIN = 26
 # Joystick management
+
+"""
 JOYSTICK_UP_PIN = 16
 JOYSTICK_DOWN_PIN = 24
 JOYSTICK_L_BRUSH_PIN = 27
 JOYSTICK_R_BRUSH_PIN = 23
 JOYSTICK_NOZZLE_PIN = 28
 JOYSTICK_ALL_PIN = 29
+"""
 
 # Expander (analog) pins
 WATER_LEVEL_PIN = 0
@@ -67,7 +71,8 @@ class WiringControls:
         wp.pinMode(VACUUM_CLEANER_SWITCH_PIN, wp.GPIO.OUTPUT)
         wp.pinMode(ENGINE_START_PIN, wp.GPIO.OUTPUT)
         wp.pinMode(ENGINE_STOP_PIN, wp.GPIO.OUTPUT)
-        wp.pinMode(BRUSH_SWITCH_PIN, wp.GPIO.OUTPUT)
+        wp.pinMode(BRUSH_L_SWITCH_PIN, wp.GPIO.OUTPUT)
+        wp.pinMode(BRUSH_R_SWITCH_PIN, wp.GPIO.OUTPUT)
         wp.pinMode(WATER_SWITCH_PIN, wp.GPIO.OUTPUT)
 
         # HARD PWM wiringPi
@@ -145,7 +150,8 @@ class WiringControls:
         self.digital_write(VACUUM_CLEANER_SWITCH_PIN, LOW)
         self.digital_write(ENGINE_START_PIN, LOW)
         self.digital_write(ENGINE_STOP_PIN, LOW)
-        self.digital_write(BRUSH_SWITCH_PIN, LOW)
+        self.digital_write(BRUSH_L_SWITCH_PIN, LOW)
+        self.digital_write(BRUSH_R_SWITCH_PIN, LOW)
         self.digital_write(WATER_SWITCH_PIN, LOW)
         self.set_pwm_dc(BRUSH_PIN, LOW)
 
